@@ -13,10 +13,10 @@ namespace Project2_QLSVLDA.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QL_PROJECTEntities : DbContext
+    public partial class QL_PROJECTEntities1 : DbContext
     {
-        public QL_PROJECTEntities()
-            : base("name=QL_PROJECTEntities")
+        public QL_PROJECTEntities1()
+            : base("name=QL_PROJECTEntities1")
         {
         }
     
@@ -26,16 +26,17 @@ namespace Project2_QLSVLDA.Models
         }
     
         public virtual DbSet<BAITAP> BAITAPs { get; set; }
+        public virtual DbSet<CHUCNANG> CHUCNANGs { get; set; }
         public virtual DbSet<CUOCHEN> CUOCHENs { get; set; }
         public virtual DbSet<GIANGVIEN> GIANGVIENs { get; set; }
         public virtual DbSet<LOPMONHOC> LOPMONHOCs { get; set; }
         public virtual DbSet<MONHOC> MONHOCs { get; set; }
         public virtual DbSet<NHOMSINHVIEN> NHOMSINHVIENs { get; set; }
-        public virtual DbSet<PHANQUYEN> PHANQUYENs { get; set; }
         public virtual DbSet<SINHVIEN> SINHVIENs { get; set; }
         public virtual DbSet<SINHVIENBAITAP> SINHVIENBAITAPs { get; set; }
         public virtual DbSet<SINHVIENCUOCHEN> SINHVIENCUOCHENs { get; set; }
         public virtual DbSet<SINHVIENMONHOC> SINHVIENMONHOCs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<USERACCOUNT> USERACCOUNTs { get; set; }
     }
 }

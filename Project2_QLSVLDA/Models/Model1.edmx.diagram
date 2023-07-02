@@ -4,19 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9fe4f266028449a7b9e1d29a7dc51db6" Name="Diagram1">
-        <EntityTypeShape EntityType="QL_PROJECTModel.BAITAP" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_PROJECTModel.CUOCHEN" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_PROJECTModel.GIANGVIEN" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_PROJECTModel.LOPMONHOC" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_PROJECTModel.MONHOC" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_PROJECTModel.NHOMSINHVIEN" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_PROJECTModel.PHANQUYEN" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_PROJECTModel.SINHVIEN" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_PROJECTModel.SINHVIENBAITAP" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_PROJECTModel.SINHVIENCUOCHEN" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_PROJECTModel.SINHVIENMONHOC" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_PROJECTModel.sysdiagram" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+      <Diagram DiagramId="ad44310626244b568f090c1e4f90e066" Name="Diagram1">
+        <EntityTypeShape EntityType="QL_PROJECTModel.BAITAP" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PROJECTModel.CHUCNANG" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PROJECTModel.CUOCHEN" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PROJECTModel.GIANGVIEN" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PROJECTModel.LOPMONHOC" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PROJECTModel.MONHOC" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PROJECTModel.NHOMSINHVIEN" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PROJECTModel.SINHVIEN" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PROJECTModel.SINHVIENBAITAP" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PROJECTModel.SINHVIENCUOCHEN" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PROJECTModel.SINHVIENMONHOC" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PROJECTModel.sysdiagram" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PROJECTModel.USERACCOUNT" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="QL_PROJECTModel.PHANQUYEN" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

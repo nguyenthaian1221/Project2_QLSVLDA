@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QL_PROJECTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QL_PROJECTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BAITAP">
           <Key>
             <PropertyRef Name="mabaitap" />
@@ -15,6 +15,13 @@
           <Property Name="noidung" Type="text" />
           <Property Name="ngaybatdau" Type="datetime" />
           <Property Name="ngayketthuc" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CHUCNANG">
+          <Key>
+            <PropertyRef Name="machucnang" />
+          </Key>
+          <Property Name="machucnang" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="tenchucnang" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="CUOCHEN">
           <Key>
@@ -30,9 +37,9 @@
             <PropertyRef Name="magv" />
           </Key>
           <Property Name="magv" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="ten" Type="nvarchar" MaxLength="50" />
+          <Property Name="ten" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="sdt" Type="char" MaxLength="10" />
-          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="chucdanh" Type="varchar" MaxLength="20" />
           <Property Name="congtac" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -68,11 +75,10 @@
         <EntityType Name="PHANQUYEN">
           <Key>
             <PropertyRef Name="machucnang" />
+            <PropertyRef Name="manguoidung" />
           </Key>
-          <Property Name="machucnang" Type="int" Nullable="false" />
-          <Property Name="tenchucnang" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="machucnang" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="manguoidung" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="tennguoidung" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="SINHVIEN">
           <Key>
@@ -133,8 +139,44 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="USERACCOUNT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="password" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_PHANQUYEN_CHUCNANG">
+          <End Role="CHUCNANG" Type="Self.CHUCNANG" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUCNANG">
+              <PropertyRef Name="machucnang" />
+            </Principal>
+            <Dependent Role="PHANQUYEN">
+              <PropertyRef Name="machucnang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHANQUYEN_USERACCOUNT">
+          <End Role="USERACCOUNT" Type="Self.USERACCOUNT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERACCOUNT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PHANQUYEN">
+              <PropertyRef Name="manguoidung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="QL_PROJECTModelStoreContainer">
           <EntitySet Name="BAITAP" EntityType="Self.BAITAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHUCNANG" EntityType="Self.CHUCNANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CUOCHEN" EntityType="Self.CUOCHEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GIANGVIEN" EntityType="Self.GIANGVIEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOPMONHOC" EntityType="Self.LOPMONHOC" Schema="dbo" store:Type="Tables" />
@@ -146,9 +188,17 @@
           <EntitySet Name="SINHVIENCUOCHEN" EntityType="Self.SINHVIENCUOCHEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SINHVIENMONHOC" EntityType="Self.SINHVIENMONHOC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERACCOUNT" EntityType="Self.USERACCOUNT" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PHANQUYEN_CHUCNANG" Association="Self.FK_PHANQUYEN_CHUCNANG">
+            <End Role="CHUCNANG" EntitySet="CHUCNANG" />
+            <End Role="PHANQUYEN" EntitySet="PHANQUYEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHANQUYEN_USERACCOUNT" Association="Self.FK_PHANQUYEN_USERACCOUNT">
+            <End Role="USERACCOUNT" EntitySet="USERACCOUNT" />
+            <End Role="PHANQUYEN" EntitySet="PHANQUYEN" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QL_PROJECTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -162,6 +212,14 @@
           <Property Name="noidung" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ngaybatdau" Type="DateTime" Precision="3" />
           <Property Name="ngayketthuc" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CHUCNANG">
+          <Key>
+            <PropertyRef Name="machucnang" />
+          </Key>
+          <Property Name="machucnang" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="tenchucnang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="USERACCOUNTs" Relationship="Self.PHANQUYEN" FromRole="CHUCNANG" ToRole="USERACCOUNT" />
         </EntityType>
         <EntityType Name="CUOCHEN">
           <Key>
@@ -177,9 +235,9 @@
             <PropertyRef Name="magv" />
           </Key>
           <Property Name="magv" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="sdt" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="chucdanh" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="congtac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -211,15 +269,6 @@
           <Property Name="tensinhvien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="malop" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="nhom" Type="Int16" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PHANQUYEN">
-          <Key>
-            <PropertyRef Name="machucnang" />
-          </Key>
-          <Property Name="machucnang" Type="Int32" Nullable="false" />
-          <Property Name="tenchucnang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="manguoidung" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="tennguoidung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SINHVIEN">
           <Key>
@@ -280,26 +329,43 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityContainer Name="QL_PROJECTEntities" annotation:LazyLoadingEnabled="true">
+        <EntityType Name="USERACCOUNT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="CHUCNANGs" Relationship="Self.PHANQUYEN" FromRole="USERACCOUNT" ToRole="CHUCNANG" />
+        </EntityType>
+        <Association Name="PHANQUYEN">
+          <End Role="CHUCNANG" Type="Self.CHUCNANG" Multiplicity="*" />
+          <End Role="USERACCOUNT" Type="Self.USERACCOUNT" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="QL_PROJECTEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BAITAPs" EntityType="Self.BAITAP" />
+          <EntitySet Name="CHUCNANGs" EntityType="Self.CHUCNANG" />
           <EntitySet Name="CUOCHENs" EntityType="Self.CUOCHEN" />
           <EntitySet Name="GIANGVIENs" EntityType="Self.GIANGVIEN" />
           <EntitySet Name="LOPMONHOCs" EntityType="Self.LOPMONHOC" />
           <EntitySet Name="MONHOCs" EntityType="Self.MONHOC" />
           <EntitySet Name="NHOMSINHVIENs" EntityType="Self.NHOMSINHVIEN" />
-          <EntitySet Name="PHANQUYENs" EntityType="Self.PHANQUYEN" />
           <EntitySet Name="SINHVIENs" EntityType="Self.SINHVIEN" />
           <EntitySet Name="SINHVIENBAITAPs" EntityType="Self.SINHVIENBAITAP" />
           <EntitySet Name="SINHVIENCUOCHENs" EntityType="Self.SINHVIENCUOCHEN" />
           <EntitySet Name="SINHVIENMONHOCs" EntityType="Self.SINHVIENMONHOC" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="USERACCOUNTs" EntityType="Self.USERACCOUNT" />
+          <AssociationSet Name="PHANQUYEN" Association="Self.PHANQUYEN">
+            <End Role="CHUCNANG" EntitySet="CHUCNANGs" />
+            <End Role="USERACCOUNT" EntitySet="USERACCOUNTs" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QL_PROJECTModelStoreContainer" CdmEntityContainer="QL_PROJECTEntities">
+        <EntityContainerMapping StorageEntityContainer="QL_PROJECTModelStoreContainer" CdmEntityContainer="QL_PROJECTEntities1">
           <EntitySetMapping Name="BAITAPs">
             <EntityTypeMapping TypeName="QL_PROJECTModel.BAITAP">
               <MappingFragment StoreEntitySet="BAITAP">
@@ -309,6 +375,14 @@
                 <ScalarProperty Name="noidung" ColumnName="noidung" />
                 <ScalarProperty Name="ngaybatdau" ColumnName="ngaybatdau" />
                 <ScalarProperty Name="ngayketthuc" ColumnName="ngayketthuc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHUCNANGs">
+            <EntityTypeMapping TypeName="QL_PROJECTModel.CHUCNANG">
+              <MappingFragment StoreEntitySet="CHUCNANG">
+                <ScalarProperty Name="machucnang" ColumnName="machucnang" />
+                <ScalarProperty Name="tenchucnang" ColumnName="tenchucnang" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -359,16 +433,6 @@
                 <ScalarProperty Name="tensinhvien" ColumnName="tensinhvien" />
                 <ScalarProperty Name="malop" ColumnName="malop" />
                 <ScalarProperty Name="nhom" ColumnName="nhom" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PHANQUYENs">
-            <EntityTypeMapping TypeName="QL_PROJECTModel.PHANQUYEN">
-              <MappingFragment StoreEntitySet="PHANQUYEN">
-                <ScalarProperty Name="machucnang" ColumnName="machucnang" />
-                <ScalarProperty Name="tenchucnang" ColumnName="tenchucnang" />
-                <ScalarProperty Name="manguoidung" ColumnName="manguoidung" />
-                <ScalarProperty Name="tennguoidung" ColumnName="tennguoidung" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -431,6 +495,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="USERACCOUNTs">
+            <EntityTypeMapping TypeName="QL_PROJECTModel.USERACCOUNT">
+              <MappingFragment StoreEntitySet="USERACCOUNT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PHANQUYEN" TypeName="QL_PROJECTModel.PHANQUYEN" StoreEntitySet="PHANQUYEN">
+            <EndProperty Name="CHUCNANG">
+              <ScalarProperty Name="machucnang" ColumnName="machucnang" />
+            </EndProperty>
+            <EndProperty Name="USERACCOUNT">
+              <ScalarProperty Name="ID" ColumnName="manguoidung" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
