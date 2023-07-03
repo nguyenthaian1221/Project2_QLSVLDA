@@ -38,11 +38,32 @@ namespace Project2_QLSVLDA.Areas.Admin.Controllers
             if (demTaiKhoan == 1  )
             {
                 // lưu vào session
-                Session["user"] = user;
-                ViewBag.user = user;
 
-                return RedirectToAction("Index");
+                if (user.ToLower() == "admin")
+                {
+                    Session["user"] = user;
+                    ViewBag.user = user;
 
+                    return RedirectToAction("Index");
+                }
+                else if (db.SINHVIENs.Any(m => m.massv == user.ToLower()))
+                {
+                    Session["user"] = user;
+                    ViewBag.user = user;
+                    return RedirectToAction("Index", "SinhVienHome",new { area = "Student"});
+                }
+
+                else if (db.GIANGVIENs.Any(m => m.magv == user.ToLower()))
+                {
+                    Session["user"] = user;
+                    ViewBag.user = user;
+                    return RedirectToAction("Index", "GiaoVienHome", new { area = "Teacher" });
+                }
+
+                else
+                {
+                    return View();
+                }
 
             }
             else
