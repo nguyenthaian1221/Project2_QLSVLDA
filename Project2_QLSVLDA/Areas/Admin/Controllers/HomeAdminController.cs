@@ -33,9 +33,9 @@ namespace Project2_QLSVLDA.Areas.Admin.Controllers
         {
             // Check DB
             QL_PROJECTEntities1 db = new QL_PROJECTEntities1();
-            int demTaiKhoan = db.USERACCOUNTs.Count(m=>m.ID.ToLower() == user.ToLower() && m.password == password);
+            int demTaiKhoan = db.USERACCOUNTs.Count(m => m.ID.ToLower() == user.ToLower() && m.password == password);
             // Check Code 
-            if (demTaiKhoan == 1  )
+            if (demTaiKhoan == 1)
             {
                 // lưu vào session
 
@@ -50,7 +50,7 @@ namespace Project2_QLSVLDA.Areas.Admin.Controllers
                 {
                     Session["user"] = user;
                     ViewBag.user = user;
-                    return RedirectToAction("Index", "SinhVienHome",new { area = "Student"});
+                    return RedirectToAction("Index", "SinhVienHome", new { area = "Student" });
                 }
 
                 else if (db.GIANGVIENs.Any(m => m.magv == user.ToLower()))

@@ -11,8 +11,10 @@
     <title>Index</title>
 </head>
 <body>
-    <div> 
-        Giao viên
+    <div>
+        Giao viên @{ var text = HttpContext.Current.Session["user"].ToString(); } <span>@text</span>
+        
+        
     </div>
 </body>
 </html>
