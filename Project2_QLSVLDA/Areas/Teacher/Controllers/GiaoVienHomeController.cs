@@ -11,7 +11,14 @@ namespace Project2_QLSVLDA.Areas.Teacher.Controllers
         // GET: Teacher/GiaoVienHome
         public ActionResult Index()
         {
-            return View();
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("DangNhap", "HomeAdmin", new { area = "Admin" });
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
