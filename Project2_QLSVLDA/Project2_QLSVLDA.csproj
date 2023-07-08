@@ -117,6 +117,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Student\Controllers\SinhVienHomeController.cs" />
+    <Compile Include="Areas\Student\Controllers\SVProfileController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Teacher\Controllers\GiaoVienHomeController.cs" />
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
@@ -187,7 +188,6 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_layout.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_PartialSideBar.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -199,6 +199,8 @@
     <Content Include="Areas\Student\Views\SinhVienHome\Index.cshtml" />
     <Content Include="Areas\Teacher\Views\GiaoVienHome\Index.cshtml" />
     <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\_layout.cshtml" />
+    <Content Include="Areas\Student\Views\SVProfile\Index.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -212,7 +214,6 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Student\Data\" />
     <Folder Include="Areas\Teacher\Data\" />
-    <Folder Include="Areas\Teacher\Views\Shared\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
