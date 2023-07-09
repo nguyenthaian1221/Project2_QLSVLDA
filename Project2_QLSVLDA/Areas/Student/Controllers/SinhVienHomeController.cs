@@ -11,16 +11,15 @@ namespace Project2_QLSVLDA.Areas.Student.Controllers
         // GET: Student/SinhVienHome
         public ActionResult Index()
         {
-            //if (Session["user"] == null)
-            //{
-            //    return RedirectToAction("DangNhap", "HomeAdmin", new { area = "Admin" });
-            //}
-            //else
-            //{
-            //    return View();
-            //}
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("DangNhap", "HomeAdmin", new { area = "Admin" });
+            }
+            else
+            {
+                return View();
+            }
 
-            return View();
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Project2_QLSVLDA.Areas.Teacher.Controllers
             {
                 return View();
             }
+
         }
     }
 }

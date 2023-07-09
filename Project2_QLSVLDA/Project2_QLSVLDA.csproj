@@ -120,6 +120,7 @@
     <Compile Include="Areas\Student\Controllers\SVProfileController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Teacher\Controllers\GiaoVienHomeController.cs" />
+    <Compile Include="Areas\Teacher\Controllers\GVProfileController.cs" />
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -201,6 +202,7 @@
     <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Teacher\Views\Shared\_layout.cshtml" />
     <Content Include="Areas\Student\Views\SVProfile\Index.cshtml" />
+    <Content Include="Areas\Teacher\Views\GVProfile\Index.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
