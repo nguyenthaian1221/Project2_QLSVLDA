@@ -98,6 +98,10 @@
   <ItemGroup>
     <Content Include="Content\Custom\clocktime.css" />
     <Content Include="Content\Custom\clocktime.js" />
+    <Content Include="Content\Custom\Img\img-DATN.png" />
+    <Content Include="Content\Custom\Img\img-pro-1.png" />
+    <Content Include="Content\Custom\Img\img-pro-2.png" />
+    <Content Include="Content\Custom\Img\img-pro-3.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Models\Model1.Context.tt">
@@ -117,9 +121,11 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Student\Controllers\SinhVienHomeController.cs" />
+    <Compile Include="Areas\Student\Controllers\SVClassController.cs" />
     <Compile Include="Areas\Student\Controllers\SVProfileController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Teacher\Controllers\GiaoVienHomeController.cs" />
+    <Compile Include="Areas\Teacher\Controllers\GVClassController.cs" />
     <Compile Include="Areas\Teacher\Controllers\GVProfileController.cs" />
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Global.asax.cs">
@@ -203,6 +209,8 @@
     <Content Include="Areas\Teacher\Views\Shared\_layout.cshtml" />
     <Content Include="Areas\Student\Views\SVProfile\Index.cshtml" />
     <Content Include="Areas\Teacher\Views\GVProfile\Index.cshtml" />
+    <Content Include="Areas\Teacher\Views\GVClass\Index.cshtml" />
+    <Content Include="Areas\Student\Views\SVClass\Index.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
