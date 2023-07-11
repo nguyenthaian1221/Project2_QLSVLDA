@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Project2_QLSVLDA.Models.SINHVIENMONHOC>
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Teacher/Views/Shared/_layout.cshtml";
+}
+
+<h2>Detail</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.kyhoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.thoigianbatdau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.thoigianketthuc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.kyhoc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.thoigianbatdau)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.thoigianketthuc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
