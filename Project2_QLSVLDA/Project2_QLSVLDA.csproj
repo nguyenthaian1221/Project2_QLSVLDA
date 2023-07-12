@@ -122,6 +122,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Student\Controllers\SinhVienHomeController.cs" />
+    <Compile Include="Areas\Student\Controllers\SubmitAssignmentController.cs" />
     <Compile Include="Areas\Student\Controllers\SVClassController.cs" />
     <Compile Include="Areas\Student\Controllers\SVProfileController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Areas\Teacher\Controllers\GVClassController.cs" />
     <Compile Include="Areas\Teacher\Controllers\GVProfileController.cs" />
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
+    <Compile Include="Content\Custom\Class\ClassID.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +214,7 @@
     <Content Include="Areas\Teacher\Views\GVProfile\Index.cshtml" />
     <Content Include="Areas\Teacher\Views\GVClass\Index.cshtml" />
     <Content Include="Areas\Student\Views\SVClass\Index.cshtml" />
+    <Content Include="Areas\Student\Views\SubmitAssignment\DetailAndSubmit.cshtml" />
     <Content Include="Areas\Teacher\Views\GVClass\Detail.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">

@@ -2,11 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
-
+using Project2_QLSVLDA.Content.Custom.Class;
 namespace Project2_QLSVLDA.Areas.Teacher.Controllers
 {
+
+
     public class GVClassController : Controller
     {
         // GET: Teacher/GVClass
@@ -21,16 +24,23 @@ namespace Project2_QLSVLDA.Areas.Teacher.Controllers
                 QL_PROJECTEntities1 db = new QL_PROJECTEntities1();
                 var session = Session["user"].ToString();
                 List<LOPMONHOC> lop = db.LOPMONHOCs.Where(m => m.magv == session).ToList();
-               
+
 
 
                 return View(lop);
             }
         }
 
-
+        [HttpGet]
+        [Route("Detail/{id}")]
         public ActionResult Detail(string id)
         {
+
+            ClassID model = new ClassID();
+            model.Id = id;
+            // Gán giá trị cho các thuộc tính khác của model
+
+
             if (Session["user"] == null)
             {
                 return RedirectToAction("DangNhap", "HomeAdmin", new { area = "Admin" });
@@ -38,10 +48,7 @@ namespace Project2_QLSVLDA.Areas.Teacher.Controllers
             else
             {
 
-                QL_PROJECTEntities1 db = new QL_PROJECTEntities1();
-                
-                List<SINHVIENMONHOC> lop = db.SINHVIENMONHOCs.Where(m => m.malop == id.Trim()).ToList();
-                return View(lop);
+                return View(model);
             }
         }
 
