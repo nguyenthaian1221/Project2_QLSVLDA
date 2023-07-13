@@ -4,108 +4,107 @@
     Layout = "~/Areas/Teacher/Views/Shared/_layout.cshtml";
 }
 
-
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.kyhoc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.thoigianbatdau)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.thoigianketthuc)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.kyhoc)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.thoigianbatdau)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.thoigianketthuc)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
-        }
-
-    </table>*@
-
-@{ 
+@{
     var id_to_cp = Model.Id;
 }
 
 @{
-
     var db = new Project2_QLSVLDA.Models.QL_PROJECTEntities1();
-    var ketqua = (from svmh in db.SINHVIENMONHOCs
-                  join sv in db.SINHVIENs 
-                  on svmh.mssv equals sv.massv
-                  join nsv in db.NHOMSINHVIENs
-                  on svmh.mssv equals nsv.masinhvien
-                  where svmh.malop == id_to_cp && nsv.malop == id_to_cp
-                  select new
-                  {
-                      svmh.mssv,
-                      svmh.malop,
-                      nsv.nhom,
-                      sv.ten
-                  }).ToList();
+    var ketqua_orgin = (from svmh in db.SINHVIENMONHOCs
+                        join sv in db.SINHVIENs on svmh.mssv equals sv.massv
+                        join nsv in db.NHOMSINHVIENs on svmh.mssv equals nsv.masinhvien
+                        where svmh.malop == id_to_cp && nsv.malop == id_to_cp
+                        select new
+                        {
+                            svmh.mssv,
+                            svmh.malop,
+                            nsv.nhom,
+                            sv.ten
+                        }).ToList();
 
+    var nhomKhacNhau = ketqua_orgin.Select(item => item.nhom).Distinct().ToArray();
 
-
-    <table class="table">
-        <tr>
-            <th>
-                MSSV
-            </th>
-            <th>
-                Tên
-            </th>
-            <th>
-                Nhóm
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in ketqua)
-        {
-            <tr>
-                <td>
-                    @item.mssv
-                </td>
-                <td>
-                    @item.ten
-                </td>
-                <td>
-                   @item.nhom
-                </td>
-                <td>
-
-                    @*@Html.ActionLink("Details", "DetailStudent", new { id = item.mssv.Trim() })*@
-                    @*<a @Html.Action("Detail","DetailStudent",new {id = item.mssv.Trim()})> Detail </a>*@
-                    <a href="/Teacher/DetailStudent/Details/@item.mssv.Trim()">Details</a>
-                </td>
-            </tr>
-        }
-
-    </table>
-
+    var ketqua_hienthi = ketqua_orgin;
 }
 
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="myDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Chọn nhóm
+            </button>
+            <div class="dropdown-menu" aria-labelledby="myDropdown">
+                @foreach (var item in nhomKhacNhau)
+                {
+                    <a class="dropdown-item" onclick="filterTable('@item.ToString().Trim()')">@item</a>
+                }
+            </div>
+        </div>
 
+        <button type="button" class="btn btn-outline-danger" onclick="resetTable()" style="margin-left: 16px;">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
 
+    <div class="row">
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    MSSV
+                </th>
+                <th>
+                    Tên
+                </th>
+                <th>
+                    Nhóm
+                </th>
+                <th>
+                    Chi tiết
+                </th>
+            </tr>
+            @foreach (var item in ketqua_hienthi)
+            {
+                <tr class="data-row">
+                    <td>
+                        @item.mssv
+                    </td>
+                    <td>
+                        @item.ten
+                    </td>
+                    <td>
+                        @item.nhom
+                    </td>
+                    <td>
+                        <a href="/Teacher/DetailStudent/Details/@item.mssv.Trim()">Details</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<script>
+    // Function to filter the table based on selected nhom
+    function filterTable(nhom) {
+        var rows = document.getElementsByClassName("data-row");
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i];
+            var nhomCell = row.getElementsByTagName("td")[2]; // Index of 'Nhóm' column
+
+            if (nhomCell.textContent.trim() === nhom) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+
+    // Function to reset the table to show all rows
+    function resetTable() {
+        var rows = document.getElementsByClassName("data-row");
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].style.display = "";
+        }
+    }
+</script>
