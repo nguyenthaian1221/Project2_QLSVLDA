@@ -52,14 +52,18 @@
 
     var db = new Project2_QLSVLDA.Models.QL_PROJECTEntities1();
     var ketqua = (from svmh in db.SINHVIENMONHOCs
-                  join sv in db.SINHVIENs
+                  join sv in db.SINHVIENs 
                   on svmh.mssv equals sv.massv
+                  join nsv in db.NHOMSINHVIENs
+                  on svmh.mssv equals nsv.masinhvien
+                  where svmh.malop == id_to_cp && nsv.malop == id_to_cp
                   select new
                   {
                       svmh.mssv,
                       svmh.malop,
+                      nsv.nhom,
                       sv.ten
-                  }).Where(svmh => svmh.malop == id_to_cp).ToList();
+                  }).ToList();
 
 
 
@@ -87,7 +91,7 @@
                     @item.ten
                 </td>
                 <td>
-                    null now
+                   @item.nhom
                 </td>
                 <td>
 

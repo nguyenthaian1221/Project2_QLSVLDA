@@ -68,7 +68,6 @@
             <PropertyRef Name="nhom" />
           </Key>
           <Property Name="masinhvien" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="tensinhvien" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="malop" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="nhom" Type="smallint" Nullable="false" />
         </EntityType>
@@ -259,17 +258,6 @@
           <Property Name="tenmonhoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="khoaquanly" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="NHOMSINHVIEN">
-          <Key>
-            <PropertyRef Name="masinhvien" />
-            <PropertyRef Name="malop" />
-            <PropertyRef Name="nhom" />
-          </Key>
-          <Property Name="masinhvien" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="tensinhvien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="malop" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="nhom" Type="Int16" Nullable="false" />
-        </EntityType>
         <EntityType Name="SINHVIEN">
           <Key>
             <PropertyRef Name="massv" />
@@ -348,7 +336,6 @@
           <EntitySet Name="GIANGVIENs" EntityType="Self.GIANGVIEN" />
           <EntitySet Name="LOPMONHOCs" EntityType="Self.LOPMONHOC" />
           <EntitySet Name="MONHOCs" EntityType="Self.MONHOC" />
-          <EntitySet Name="NHOMSINHVIENs" EntityType="Self.NHOMSINHVIEN" />
           <EntitySet Name="SINHVIENs" EntityType="Self.SINHVIEN" />
           <EntitySet Name="SINHVIENBAITAPs" EntityType="Self.SINHVIENBAITAP" />
           <EntitySet Name="SINHVIENCUOCHENs" EntityType="Self.SINHVIENCUOCHEN" />
@@ -359,7 +346,18 @@
             <End Role="CHUCNANG" EntitySet="CHUCNANGs" />
             <End Role="USERACCOUNT" EntitySet="USERACCOUNTs" />
           </AssociationSet>
+          <EntitySet Name="NHOMSINHVIENs" EntityType="QL_PROJECTModel.NHOMSINHVIEN" />
         </EntityContainer>
+        <EntityType Name="NHOMSINHVIEN">
+          <Key>
+            <PropertyRef Name="masinhvien" />
+            <PropertyRef Name="malop" />
+            <PropertyRef Name="nhom" />
+          </Key>
+          <Property Name="masinhvien" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="malop" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="nhom" Type="Int16" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -423,16 +421,6 @@
                 <ScalarProperty Name="mamonhoc" ColumnName="mamonhoc" />
                 <ScalarProperty Name="tenmonhoc" ColumnName="tenmonhoc" />
                 <ScalarProperty Name="khoaquanly" ColumnName="khoaquanly" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NHOMSINHVIENs">
-            <EntityTypeMapping TypeName="QL_PROJECTModel.NHOMSINHVIEN">
-              <MappingFragment StoreEntitySet="NHOMSINHVIEN">
-                <ScalarProperty Name="masinhvien" ColumnName="masinhvien" />
-                <ScalarProperty Name="tensinhvien" ColumnName="tensinhvien" />
-                <ScalarProperty Name="malop" ColumnName="malop" />
-                <ScalarProperty Name="nhom" ColumnName="nhom" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -511,6 +499,15 @@
               <ScalarProperty Name="ID" ColumnName="manguoidung" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="NHOMSINHVIENs">
+            <EntityTypeMapping TypeName="QL_PROJECTModel.NHOMSINHVIEN">
+              <MappingFragment StoreEntitySet="NHOMSINHVIEN">
+                <ScalarProperty Name="nhom" ColumnName="nhom" />
+                <ScalarProperty Name="malop" ColumnName="malop" />
+                <ScalarProperty Name="masinhvien" ColumnName="masinhvien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

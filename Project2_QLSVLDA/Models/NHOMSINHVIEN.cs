@@ -15,7 +15,6 @@ namespace Project2_QLSVLDA.Models
     public partial class NHOMSINHVIEN
     {
         public string masinhvien { get; set; }
-        public string tensinhvien { get; set; }
         public string malop { get; set; }
         public short nhom { get; set; }
     }

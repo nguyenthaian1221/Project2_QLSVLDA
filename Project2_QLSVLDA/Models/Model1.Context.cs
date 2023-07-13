@@ -31,12 +31,12 @@ namespace Project2_QLSVLDA.Models
         public virtual DbSet<GIANGVIEN> GIANGVIENs { get; set; }
         public virtual DbSet<LOPMONHOC> LOPMONHOCs { get; set; }
         public virtual DbSet<MONHOC> MONHOCs { get; set; }
-        public virtual DbSet<NHOMSINHVIEN> NHOMSINHVIENs { get; set; }
         public virtual DbSet<SINHVIEN> SINHVIENs { get; set; }
         public virtual DbSet<SINHVIENBAITAP> SINHVIENBAITAPs { get; set; }
         public virtual DbSet<SINHVIENCUOCHEN> SINHVIENCUOCHENs { get; set; }
         public virtual DbSet<SINHVIENMONHOC> SINHVIENMONHOCs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<USERACCOUNT> USERACCOUNTs { get; set; }
+        public virtual DbSet<NHOMSINHVIEN> NHOMSINHVIENs { get; set; }
     }
 }
