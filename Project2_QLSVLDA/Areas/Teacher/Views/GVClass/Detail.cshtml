@@ -90,9 +90,10 @@
                     null now
                 </td>
                 <td>
-                   
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
-                  
+
+                    @*@Html.ActionLink("Details", "DetailStudent", new { id = item.mssv.Trim() })*@
+                    @*<a @Html.Action("Detail","DetailStudent",new {id = item.mssv.Trim()})> Detail </a>*@
+                    <a href="/Teacher/DetailStudent/Details/@item.mssv.Trim()">Details</a>
                 </td>
             </tr>
         }

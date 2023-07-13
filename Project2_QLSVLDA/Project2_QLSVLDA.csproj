@@ -126,6 +126,7 @@
     <Compile Include="Areas\Student\Controllers\SVClassController.cs" />
     <Compile Include="Areas\Student\Controllers\SVProfileController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
+    <Compile Include="Areas\Teacher\Controllers\DetailStudentController.cs" />
     <Compile Include="Areas\Teacher\Controllers\GiaoVienHomeController.cs" />
     <Compile Include="Areas\Teacher\Controllers\GVClassController.cs" />
     <Compile Include="Areas\Teacher\Controllers\GVProfileController.cs" />
@@ -216,6 +217,7 @@
     <Content Include="Areas\Student\Views\SVClass\Index.cshtml" />
     <Content Include="Areas\Student\Views\SubmitAssignment\DetailAndSubmit.cshtml" />
     <Content Include="Areas\Teacher\Views\GVClass\Detail.cshtml" />
+    <Content Include="Areas\Teacher\Views\DetailStudent\Details.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
