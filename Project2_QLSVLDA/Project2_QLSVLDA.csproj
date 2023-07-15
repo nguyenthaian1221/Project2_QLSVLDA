@@ -127,6 +127,8 @@
     <Compile Include="Areas\Student\Controllers\SVProfileController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Teacher\Controllers\DetailStudentController.cs" />
+    <Compile Include="Areas\Teacher\Controllers\GiaoVienBaiTapController.cs" />
+    <Compile Include="Areas\Teacher\Controllers\GiaoVienCuocHenController.cs" />
     <Compile Include="Areas\Teacher\Controllers\GiaoVienHomeController.cs" />
     <Compile Include="Areas\Teacher\Controllers\GVClassController.cs" />
     <Compile Include="Areas\Teacher\Controllers\GVProfileController.cs" />
@@ -218,6 +220,7 @@
     <Content Include="Areas\Student\Views\SubmitAssignment\DetailAndSubmit.cshtml" />
     <Content Include="Areas\Teacher\Views\GVClass\Detail.cshtml" />
     <Content Include="Areas\Teacher\Views\DetailStudent\Details.cshtml" />
+    <Content Include="Areas\Teacher\Views\GiaoVienCuocHen\Index.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -231,6 +234,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Student\Data\" />
     <Folder Include="Areas\Teacher\Data\" />
+    <Folder Include="Areas\Teacher\Views\GiaoVienBaiTap\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>

@@ -14,11 +14,20 @@ namespace Project2_QLSVLDA.Models
     
     public partial class BAITAP
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BAITAP()
+        {
+            this.SINHVIENBAITAPs = new HashSet<SINHVIENBAITAP>();
+        }
+    
         public string mabaitap { get; set; }
         public string malop { get; set; }
         public Nullable<int> manhom { get; set; }
         public string noidung { get; set; }
         public Nullable<System.DateTime> ngaybatdau { get; set; }
         public Nullable<System.DateTime> ngayketthuc { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SINHVIENBAITAP> SINHVIENBAITAPs { get; set; }
     }
 }

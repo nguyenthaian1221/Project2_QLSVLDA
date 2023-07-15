@@ -14,11 +14,13 @@ namespace Project2_QLSVLDA.Models
     
     public partial class SINHVIENCUOCHEN
     {
-        public string macuochen { get; set; }
+        public int macuochen { get; set; }
         public string masinhvien { get; set; }
         public string manhom { get; set; }
         public string magiaovien { get; set; }
         public Nullable<System.DateTime> thoigiandat { get; set; }
         public string malop { get; set; }
+    
+        public virtual CUOCHEN CUOCHEN { get; set; }
     }
 }

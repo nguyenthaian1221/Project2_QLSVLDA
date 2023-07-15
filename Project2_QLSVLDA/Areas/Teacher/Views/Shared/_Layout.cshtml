@@ -101,33 +101,14 @@
                         <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="@Url.Action("Index", "GiaoVienHome")" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Dashboard
-                                    <i class="right fas fa-angle-left"></i>
+                                    Home
+
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="~/Content/index.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v1</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="~/Content/index2.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v2</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="~/Content/index3.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v3</p>
-                                    </a>
-                                </li>
-                            </ul>
+
                         </li>
                         <li class="nav-item">
                             <a href="@Url.Action("Index", "GVClass")" class="nav-link">
@@ -140,62 +121,28 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
+                                <i class="nav-icon far fa-calendar-alt"></i>
                                 <p>
-                                    Layout Options
+                                    Cuộc hẹn
+                                    @*<i class="fas fa-angle-left right"></i>
+            <span class="badge badge-info right">6</span>*@
                                     <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right">6</span>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../layout/top-nav.html" class="nav-link">
+                                    <a href="@Url.Action("Index", "GiaoVienCuocHen")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Top Navigation</p>
+                                        <p>Tạo cuộc hẹn</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="../layout/top-nav-sidebar.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Top Navigation + Sidebar</p>
+                                        <p>Danh sách cuộc hẹn</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="../layout/boxed.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Boxed</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/fixed-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Sidebar</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/fixed-sidebar-custom.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Sidebar <small>+ Custom Area</small></p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/fixed-topnav.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Navbar</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/fixed-footer.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Footer</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/collapsed-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Collapsed Sidebar</p>
-                                    </a>
-                                </li>
+
                             </ul>
                         </li>
 
@@ -203,7 +150,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
-                                    Forms
+                                    Bài tập
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -211,40 +158,20 @@
                                 <li class="nav-item">
                                     <a href="../forms/general.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>General Elements</p>
+                                        <p> Tạo bài tập</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="../forms/advanced.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Advanced Elements</p>
+                                        <p>Lịch sử nộp + điểm</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="../forms/editors.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Editors</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../forms/validation.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Validation</p>
-                                    </a>
-                                </li>
+
                             </ul>
                         </li>
 
 
-                        <li class="nav-item">
-                            <a href="../calendar.html" class="nav-link">
-                                <i class="nav-icon far fa-calendar-alt"></i>
-                                <p>
-                                    Calendar
-                                    <span class="badge badge-info right">2</span>
-                                </p>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <a href="../widgets.html" class="nav-link">
                                 <i class="nav-icon fas fa-clock"></i>

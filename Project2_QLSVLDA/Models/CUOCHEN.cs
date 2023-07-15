@@ -14,9 +14,21 @@ namespace Project2_QLSVLDA.Models
     
     public partial class CUOCHEN
     {
-        public string macuochen { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CUOCHEN()
+        {
+            this.SINHVIENCUOCHENs = new HashSet<SINHVIENCUOCHEN>();
+        }
+    
+        public int macuochen { get; set; }
         public Nullable<System.DateTime> thoigianbatdau { get; set; }
         public Nullable<System.DateTime> thoigianketthuc { get; set; }
         public string ghichu { get; set; }
+        public string malop { get; set; }
+        public string magiaovien { get; set; }
+        public int tinhtrang { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SINHVIENCUOCHEN> SINHVIENCUOCHENs { get; set; }
     }
 }
