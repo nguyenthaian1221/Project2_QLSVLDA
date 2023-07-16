@@ -34,6 +34,7 @@
           <Property Name="malop" Type="nchar" MaxLength="10" />
           <Property Name="magiaovien" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="tinhtrang" Type="int" Nullable="false" />
+          <Property Name="diadiem" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="GIANGVIEN">
           <Key>
@@ -361,12 +362,12 @@
             <End Role="USERACCOUNT" EntitySet="USERACCOUNTs" />
           </AssociationSet>
           <EntitySet Name="NHOMSINHVIENs" EntityType="QL_PROJECTModel.NHOMSINHVIEN" />
-          <EntitySet Name="CUOCHENs" EntityType="QL_PROJECTModel.CUOCHEN" />
           <EntitySet Name="SINHVIENCUOCHENs" EntityType="QL_PROJECTModel.SINHVIENCUOCHEN" />
           <AssociationSet Name="FK_SINHVIENBAITAP_BAITAP" Association="QL_PROJECTModel.FK_SINHVIENBAITAP_BAITAP">
             <End Role="BAITAP" EntitySet="BAITAPs" />
             <End Role="SINHVIENBAITAP" EntitySet="SINHVIENBAITAPs" />
           </AssociationSet>
+          <EntitySet Name="CUOCHENs" EntityType="QL_PROJECTModel.CUOCHEN" />
           <AssociationSet Name="FK_SINHVIENCUOCHEN_CUOCHEN" Association="QL_PROJECTModel.FK_SINHVIENCUOCHEN_CUOCHEN">
             <End Role="CUOCHEN" EntitySet="CUOCHENs" />
             <End Role="SINHVIENCUOCHEN" EntitySet="SINHVIENCUOCHENs" />
@@ -381,19 +382,6 @@
           <Property Name="masinhvien" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="malop" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="nhom" Type="Int16" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CUOCHEN">
-          <Key>
-            <PropertyRef Name="macuochen" />
-          </Key>
-          <Property Name="macuochen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="thoigianbatdau" Type="DateTime" Precision="3" />
-          <Property Name="thoigianketthuc" Type="DateTime" Precision="3" />
-          <Property Name="ghichu" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="malop" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="magiaovien" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="tinhtrang" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="SINHVIENCUOCHENs" Relationship="QL_PROJECTModel.FK_SINHVIENCUOCHEN_CUOCHEN" FromRole="CUOCHEN" ToRole="SINHVIENCUOCHEN" />
         </EntityType>
         <EntityType Name="SINHVIENCUOCHEN">
           <Key>
@@ -420,6 +408,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CUOCHEN">
+          <Key>
+            <PropertyRef Name="macuochen" />
+          </Key>
+          <Property Name="macuochen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="thoigianbatdau" Type="DateTime" Precision="3" />
+          <Property Name="thoigianketthuc" Type="DateTime" Precision="3" />
+          <Property Name="ghichu" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="malop" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="magiaovien" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="tinhtrang" Type="Int32" Nullable="false" />
+          <Property Name="diadiem" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="SINHVIENCUOCHENs" Relationship="QL_PROJECTModel.FK_SINHVIENCUOCHEN_CUOCHEN" FromRole="CUOCHEN" ToRole="SINHVIENCUOCHEN" />
+        </EntityType>
         <Association Name="FK_SINHVIENCUOCHEN_CUOCHEN">
           <End Type="QL_PROJECTModel.CUOCHEN" Role="CUOCHEN" Multiplicity="1" />
           <End Type="QL_PROJECTModel.SINHVIENCUOCHEN" Role="SINHVIENCUOCHEN" Multiplicity="*" />
@@ -560,19 +562,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CUOCHENs">
-            <EntityTypeMapping TypeName="QL_PROJECTModel.CUOCHEN">
-              <MappingFragment StoreEntitySet="CUOCHEN">
-                <ScalarProperty Name="tinhtrang" ColumnName="tinhtrang" />
-                <ScalarProperty Name="magiaovien" ColumnName="magiaovien" />
-                <ScalarProperty Name="malop" ColumnName="malop" />
-                <ScalarProperty Name="ghichu" ColumnName="ghichu" />
-                <ScalarProperty Name="thoigianketthuc" ColumnName="thoigianketthuc" />
-                <ScalarProperty Name="thoigianbatdau" ColumnName="thoigianbatdau" />
-                <ScalarProperty Name="macuochen" ColumnName="macuochen" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SINHVIENCUOCHENs">
             <EntityTypeMapping TypeName="QL_PROJECTModel.SINHVIENCUOCHEN">
               <MappingFragment StoreEntitySet="SINHVIENCUOCHEN">
@@ -581,6 +570,20 @@
                 <ScalarProperty Name="magiaovien" ColumnName="magiaovien" />
                 <ScalarProperty Name="manhom" ColumnName="manhom" />
                 <ScalarProperty Name="masinhvien" ColumnName="masinhvien" />
+                <ScalarProperty Name="macuochen" ColumnName="macuochen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUOCHENs">
+            <EntityTypeMapping TypeName="QL_PROJECTModel.CUOCHEN">
+              <MappingFragment StoreEntitySet="CUOCHEN">
+                <ScalarProperty Name="diadiem" ColumnName="diadiem" />
+                <ScalarProperty Name="tinhtrang" ColumnName="tinhtrang" />
+                <ScalarProperty Name="magiaovien" ColumnName="magiaovien" />
+                <ScalarProperty Name="malop" ColumnName="malop" />
+                <ScalarProperty Name="ghichu" ColumnName="ghichu" />
+                <ScalarProperty Name="thoigianketthuc" ColumnName="thoigianketthuc" />
+                <ScalarProperty Name="thoigianbatdau" ColumnName="thoigianbatdau" />
                 <ScalarProperty Name="macuochen" ColumnName="macuochen" />
               </MappingFragment>
             </EntityTypeMapping>

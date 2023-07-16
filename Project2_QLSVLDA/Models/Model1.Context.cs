@@ -36,7 +36,7 @@ namespace Project2_QLSVLDA.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<USERACCOUNT> USERACCOUNTs { get; set; }
         public virtual DbSet<NHOMSINHVIEN> NHOMSINHVIENs { get; set; }
-        public virtual DbSet<CUOCHEN> CUOCHENs { get; set; }
         public virtual DbSet<SINHVIENCUOCHEN> SINHVIENCUOCHENs { get; set; }
+        public virtual DbSet<CUOCHEN> CUOCHENs { get; set; }
     }
 }

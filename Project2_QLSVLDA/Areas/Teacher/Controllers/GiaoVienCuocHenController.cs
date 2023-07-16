@@ -41,12 +41,32 @@ namespace Project2_QLSVLDA.Areas.Teacher.Controllers
         public ActionResult ActionName(string ngay, string giobatdau, string gioketthuc, string diadiem)
         {
 
+            QL_PROJECTEntities1 db = new QL_PROJECTEntities1();
+
             string combinedDateTimeString = ngay + " " + giobatdau;
             DateTime start_time = DateTime.ParseExact(combinedDateTimeString, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
             combinedDateTimeString = ngay + " " + gioketthuc;
             DateTime end_time = DateTime.ParseExact(combinedDateTimeString, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
             string location = diadiem.Trim();
             string mgv = Session["user"].ToString();
+
+            db.CUOCHENs.Add(
+                new CUOCHEN
+                {
+                    thoigianbatdau = start_time,
+                    thoigianketthuc = end_time,
+                    diadiem = location,
+                    magiaovien = mgv,
+                    tinhtrang = 1, // mặc định set bằng 1 vì mới tạo
+
+                }) ;
+            
+            db.SaveChanges();
+
+
+
+
+
             return RedirectToAction("Index", "GiaoVienCuocHen", new { area = "Teacher" });
         }
     }

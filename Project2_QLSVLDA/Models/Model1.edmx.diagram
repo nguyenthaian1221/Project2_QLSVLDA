@@ -17,9 +17,9 @@
         <EntityTypeShape EntityType="QL_PROJECTModel.USERACCOUNT" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="QL_PROJECTModel.PHANQUYEN" ManuallyRouted="false" />
         <EntityTypeShape EntityType="QL_PROJECTModel.NHOMSINHVIEN" Width="1.5" PointX="2.625" PointY="6.875" />
-        <EntityTypeShape EntityType="QL_PROJECTModel.CUOCHEN" Width="1.5" PointX="4.625" PointY="6.375" />
         <EntityTypeShape EntityType="QL_PROJECTModel.SINHVIENCUOCHEN" Width="1.5" PointX="7.125" PointY="6.375" />
         <AssociationConnector Association="QL_PROJECTModel.FK_SINHVIENBAITAP_BAITAP" />
+        <EntityTypeShape EntityType="QL_PROJECTModel.CUOCHEN" Width="1.5" PointX="4.875" PointY="7.125" />
         <AssociationConnector Association="QL_PROJECTModel.FK_SINHVIENCUOCHEN_CUOCHEN" />
       </Diagram>
     </edmx:Diagrams>
