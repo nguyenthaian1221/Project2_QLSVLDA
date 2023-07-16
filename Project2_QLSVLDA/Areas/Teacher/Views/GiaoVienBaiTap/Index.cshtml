@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Teacher/Views/Shared/_layout.cshtml";
+
+}
+
+
+@{
+    var db = new Project2_QLSVLDA.Models.QL_PROJECTEntities1();
+    var ss = Session["user"].ToString();
+    var ds_lop_voi_giao_vien = (from lmh in db.LOPMONHOCs
+                                where lmh.magv.ToString().Trim() == ss
+                                select new
+                                {
+                                    lmh.malop
+                                }).ToList();
+
+}
+
+
+<section class="content">
+    <div class="container-fluid">
+
+
+
+        <div class="row">
+            <div class="offset-md-2 col-md-7">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Tạo bài tập</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+
+                            <form method="post" action="/GiaoVienCuocHen/ActionName">
+
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label for="city">Mã lớp</label>
+                                    </div>
+
+                                    <div class="col">
+                                        <select class="form-select form-select-sm mb-3 offset-md-2" id="lopgianday" aria-label=".form-select-sm" style="width:200px">
+                                            <option value="" selected>Chọn mã lớp</option>
+                                            @foreach (var item in ds_lop_voi_giao_vien)
+                                            {
+                                                <option value="@item.malop">@item.malop</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label for="district">Mã Nhóm</label>
+                                    </div>
+                                    <div class="col">
+                                        <select class="form-select form-select-sm mb-3 offset-md-2" id="nhomtronglop" aria-label=".form-select-sm" style="width:200px">
+                                            <option value="" selected>Chọn nhóm</option>
+                                            @for (int i = 1; i <= 20; i++)
+                                            {
+                                                <option value="@i.ToString()">@i.ToString()</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                @*<input type="text" class="form-control" id="malop" name="malop" />*@
+
+
+
+
+
+                                @* <input type="text" class="form-control" id="manhom" name="manhom" />*@
+
+
+
+
+
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="start-date">Start Date</label>
+                                        <input type="date" class="form-control" id="start-date" name="ngaybatdau">
+                                    </div>
+                                    <div class="form-group offset-md-2">
+                                        <label for="start-time">Start Time</label>
+                                        <input type="time" class="form-control" id="start-time" name="giobatdau">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="start-date">End Date</label>
+                                        <input type="date" class="form-control" id="start-date" name="ngayketthuc">
+                                    </div>
+
+                                    <div class="form-group offset-md-2">
+                                        <label for="end-time">End Time</label>
+                                        <input type="time" class="form-control" id="end-time" name="gioketthuc">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="location">Nội dung bài tập</label>
+                                    @* <input type="text" class="form-control" id="location" name="diadiem">*@
+                                    <div>
+                                        <textarea rows="4" id="location" style="width:100%">
+
+                                        </textarea>
+                                    </div>
+
+
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </form>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+
+    <!-- /.container-fluid -->
+</section>
+
