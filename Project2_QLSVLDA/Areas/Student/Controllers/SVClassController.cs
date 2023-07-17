@@ -1,4 +1,5 @@
-﻿using Project2_QLSVLDA.Models;
+﻿using Project2_QLSVLDA.Content.Custom.Class;
+using Project2_QLSVLDA.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,30 @@ namespace Project2_QLSVLDA.Areas.Student.Controllers
                 var session = Session["user"].ToString();
                 //List<LOPMONHOC> lop = db.LOPMONHOCs.Where(m => m.magv == session).ToList();
                 List<SINHVIENMONHOC> lop = db.SINHVIENMONHOCs.Where(m => m.mssv == session).ToList();
-                Console.WriteLine(lop);
+
 
                 return View(lop);
+            }
+        }
+
+        [HttpGet]
+        [Route("Detail/{id}")]
+        public ActionResult Detail(string id)
+        {
+
+            ClassID model = new ClassID();
+            model.Id = id;
+            // Gán giá trị cho các thuộc tính khác của model
+
+
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("DangNhap", "HomeAdmin", new { area = "Admin" });
+            }
+            else
+            {
+
+                return View(model);
             }
         }
     }
