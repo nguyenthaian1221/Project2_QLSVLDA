@@ -19,11 +19,7 @@ namespace Project2_QLSVLDA.Models
         {
             this.SINHVIENCUOCHENs = new HashSet<SINHVIENCUOCHEN>();
         }
-        // tinhtrang
-        // 1. chua ai dat
-        // 2. da co nguoi dat
-        // 3. het han
-
+    
         public int macuochen { get; set; }
         public Nullable<System.DateTime> thoigianbatdau { get; set; }
         public Nullable<System.DateTime> thoigianketthuc { get; set; }

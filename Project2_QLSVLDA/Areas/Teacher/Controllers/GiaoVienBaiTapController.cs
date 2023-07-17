@@ -3,6 +3,7 @@ using Project2_QLSVLDA.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,6 +31,42 @@ namespace Project2_QLSVLDA.Areas.Teacher.Controllers
         }
 
 
+
+
+        [HttpPost]
+        public ActionResult ActionName(string ngaybatdau, string ngayketthuc, string giobatdau, string gioketthuc, string lopgianday, string nhomtronglop, string exercise_content)
+        {
+
+            QL_PROJECTEntities1 db = new QL_PROJECTEntities1();
+
+            string combinedDateTimeString = ngaybatdau + " " + giobatdau;
+            DateTime start_time = DateTime.ParseExact(combinedDateTimeString, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+            combinedDateTimeString = ngayketthuc + " " + gioketthuc;
+            DateTime end_time = DateTime.ParseExact(combinedDateTimeString, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+            string lop = lopgianday;
+            string nhom = nhomtronglop;
+            string nd = exercise_content.Trim();
+
+
+            db.BAITAPs.Add(
+                new BAITAP
+                {
+                    malop = lop,
+                    manhom = nhom,
+                    noidung = nd,
+                    ngaybatdau = start_time,
+                    ngayketthuc = end_time,
+                }
+
+                ); 
+            db.SaveChanges();
+
+
+
+
+
+            return RedirectToAction("Index", "GiaoVienBaiTap", new { area = "Teacher" });
+        }
 
     }
 }

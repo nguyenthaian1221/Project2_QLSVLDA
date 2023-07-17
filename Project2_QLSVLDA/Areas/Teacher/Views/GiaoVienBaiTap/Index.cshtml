@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <div class="container">
 
-                            <form method="post" action="/GiaoVienCuocHen/ActionName">
+                            <form method="post" action="/GiaoVienBaiTap/ActionName" onsubmit="return validateForm()">
 
 
                                 <div class="row">
@@ -41,11 +41,11 @@
                                     </div>
 
                                     <div class="col">
-                                        <select class="form-select form-select-sm mb-3 offset-md-2" id="lopgianday" aria-label=".form-select-sm" style="width:200px">
+                                        <select name="lopgianday" class="form-select form-select-sm mb-3 offset-md-2" id="lopgianday" aria-label=".form-select-sm" style="width:200px">
                                             <option value="" selected>Chọn mã lớp</option>
                                             @foreach (var item in ds_lop_voi_giao_vien)
                                             {
-                                                <option value="@item.malop">@item.malop</option>
+                                                <option value="@item.malop.ToString()">@item.malop</option>
                                             }
                                         </select>
                                     </div>
@@ -56,7 +56,7 @@
                                         <label for="district">Mã Nhóm</label>
                                     </div>
                                     <div class="col">
-                                        <select class="form-select form-select-sm mb-3 offset-md-2" id="nhomtronglop" aria-label=".form-select-sm" style="width:200px">
+                                        <select name="nhomtronglop" class="form-select form-select-sm mb-3 offset-md-2" id="nhomtronglop" aria-label=".form-select-sm" style="width:200px">
                                             <option value="" selected>Chọn nhóm</option>
                                             @for (int i = 1; i <= 20; i++)
                                             {
@@ -92,8 +92,8 @@
 
                                 <div class="row">
                                     <div class="form-group">
-                                        <label for="start-date">End Date</label>
-                                        <input type="date" class="form-control" id="start-date" name="ngayketthuc">
+                                        <label for="end-date">End Date</label>
+                                        <input type="date" class="form-control" id="end-date" name="ngayketthuc">
                                     </div>
 
                                     <div class="form-group offset-md-2">
@@ -103,10 +103,10 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="location">Nội dung bài tập</label>
+                                    <label for="exercise_content">Nội dung bài tập</label>
                                     @* <input type="text" class="form-control" id="location" name="diadiem">*@
                                     <div>
-                                        <textarea rows="4" id="location" style="width:100%">
+                                        <textarea name="exercise_content" rows="4" id="exercise_content" style="width:100%">
 
                                         </textarea>
                                     </div>
@@ -134,3 +134,64 @@
     <!-- /.container-fluid -->
 </section>
 
+@section JS{
+    <script>
+
+        function validateForm() {
+            var startDate = new Date(document.getElementById('start-date').value + ' ' + document.getElementById('start-time').value);
+            var endDate = new Date(document.getElementById('end-date').value + ' ' + document.getElementById('end-time').value);
+            var lopgianday = document.getElementById("lopgianday");
+            var nhomtronglop = document.getElementById("nhomtronglop");
+ 
+            if (lopgianday.value.trim() === "") {
+                alert("Vui lòng chọn mã lớp.");
+                return false;
+            }
+
+            if (nhomtronglop.value.trim() === "") {
+                alert("Vui lòng chọn mã nhóm.");
+                return false;
+            }
+
+            if (!document.getElementById('start-date').value) {
+                alert("Vui lòng điền Start date");
+                return false;
+            }
+
+            if (!document.getElementById('start-time').value) {
+                alert("Vui lòng điền Start time");
+                return false;
+            }
+
+
+            if (!document.getElementById('end-date').value) {
+                alert("Vui lòng điền End date");
+                return false;
+            }
+
+            if (!document.getElementById('end-time').value) {
+                alert("Vui lòng điền End time");
+                return false;
+            }
+
+            var exercise_content = document.getElementById("exercise_content").value.trim();
+
+            if (exercise_content === "") {
+                alert("Vui lòng điền nội dung bài tập");
+                return false;
+            }
+
+            if (endDate <= startDate) {
+                alert('End time must be after start time.');
+
+
+                return false;
+            }
+
+
+
+            return true;
+        }
+
+    </script>
+} 

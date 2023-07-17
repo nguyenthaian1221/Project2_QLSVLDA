@@ -16,6 +16,6 @@ namespace Project2_QLSVLDA.Models
     {
         public string masinhvien { get; set; }
         public string malop { get; set; }
-        public short nhom { get; set; }
+        public string nhom { get; set; }
     }
 }

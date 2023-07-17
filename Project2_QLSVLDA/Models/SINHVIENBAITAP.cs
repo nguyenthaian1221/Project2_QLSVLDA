@@ -15,7 +15,7 @@ namespace Project2_QLSVLDA.Models
     public partial class SINHVIENBAITAP
     {
         public string masinhvien { get; set; }
-        public string mabaitap { get; set; }
+        public int mabaitap { get; set; }
         public string path { get; set; }
         public System.DateTime thoigiannop { get; set; }
         public string malop { get; set; }

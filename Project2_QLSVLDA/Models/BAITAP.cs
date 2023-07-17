@@ -20,9 +20,9 @@ namespace Project2_QLSVLDA.Models
             this.SINHVIENBAITAPs = new HashSet<SINHVIENBAITAP>();
         }
     
-        public string mabaitap { get; set; }
+        public int mabaitap { get; set; }
         public string malop { get; set; }
-        public Nullable<int> manhom { get; set; }
+        public string manhom { get; set; }
         public string noidung { get; set; }
         public Nullable<System.DateTime> ngaybatdau { get; set; }
         public Nullable<System.DateTime> ngayketthuc { get; set; }
