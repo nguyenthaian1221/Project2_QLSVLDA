@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project2_QLSVLDA.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,13 +12,40 @@ namespace Project2_QLSVLDA.Areas.Student.Controllers
         // GET: Student/SubmitAssignment
         public ActionResult Index()
         {
-            return View();
+
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("DangNhap", "HomeAdmin", new { area = "Admin" });
+            }
+            else
+            {
+                return View();
+            }
+
         }
 
-        public ActionResult DetailAndSubmit()
+
+        [HttpGet]
+        [Route("DetailAndSubmit/{id}")]
+        public ActionResult DetailAndSubmit(string id)
         {
-            return View();
-        }
 
+
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("DangNhap", "HomeAdmin", new { area = "Admin" });
+            }
+            else
+            {
+                QL_PROJECTEntities1 db = new QL_PROJECTEntities1();
+                var noidung_baitap = (from m in db.BAITAPs
+                                     where id == m.mabaitap.ToString().Trim()
+                                     select m.noidung).First();
+                ViewBag.noidung = noidung_baitap;
+               
+                return View();
+            }
+
+        }
     }
 }

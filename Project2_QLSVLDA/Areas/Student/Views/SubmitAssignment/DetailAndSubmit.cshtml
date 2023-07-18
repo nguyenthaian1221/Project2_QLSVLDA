@@ -1,4 +1,5 @@
-﻿
+﻿@model string
+
 @{
     ViewBag.Title = "DetailAndSubmit";
     Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
@@ -23,7 +24,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Detail</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" value="Assignment Detail" readonly>
+                                <input type="text" class="form-control" id="exampleInputEmail1" value="@ViewBag.noidung" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Comment</label>

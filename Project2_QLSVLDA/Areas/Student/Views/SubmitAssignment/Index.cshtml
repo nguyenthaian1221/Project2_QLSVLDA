@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var db = new Project2_QLSVLDA.Models.QL_PROJECTEntities1();
+
+    string ses_sinhvien = Session["user"].ToString();
+
+    var list_bt_lop = (from bt in db.BAITAPs
+                       join nsv in db.NHOMSINHVIENs on bt.malop equals nsv.malop
+                       where nsv.masinhvien.Trim() == ses_sinhvien
+                       select bt).ToList();
+
+
+    var nhomKhacNhau = list_bt_lop.Select(item => item.malop).Distinct().ToArray();
+
+
+
+
+}
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="myDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Chọn lớp
+            </button>
+            <div class="dropdown-menu" aria-labelledby="myDropdown">
+                @foreach (var item in nhomKhacNhau)
+                {
+                    <a class="dropdown-item" onclick="filterTable('@item.ToString().Trim()')">@item</a>
+                }
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-outline-danger" onclick="resetTable()" style="margin-left: 16px;">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <div class="row">
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Mã lớp
+                </th>
+                <th>
+                    Nhóm
+                </th>
+                <th>
+                    Bắt đầu
+                </th>
+
+                <th>
+                    Kết thúc
+                </th>
+
+                <th>Chi tiết</th>
+            </tr>
+            @foreach (var item in list_bt_lop)
+            {
+                <tr class="data-row">
+                    <td>
+                        @item.mabaitap
+                    </td>
+                    <td>
+                        @item.malop
+                    </td>
+                    <td>
+                        @item.manhom
+                    </td>
+                    <td>
+                        @item.ngaybatdau
+                    </td>
+                    <td>
+                        @item.ngayketthuc
+                    </td>
+                    <td>
+                        @*<a href="/teacher/detailstudent/details/@item.mssv.trim()">details</a>*@
+                        <a href="@Url.Action("DetailAndSubmit","SubmitAssignment", new {id = item.mabaitap.ToString().Trim()})"> Details</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<script>
+    // Function to filter the table based on selected nhom
+    function filterTable(nhom) {
+        var rows = document.getElementsByClassName("data-row");
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i];
+            var nhomCell = row.getElementsByTagName("td")[1]; // Index of 'Nhóm' column
+
+            if (nhomCell.textContent.trim() === nhom) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+
+    // Function to reset the table to show all rows
+    function resetTable() {
+        var rows = document.getElementsByClassName("data-row");
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].style.display = "";
+        }
+    }
+</script>

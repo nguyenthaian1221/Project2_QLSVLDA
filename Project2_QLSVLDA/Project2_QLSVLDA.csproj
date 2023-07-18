@@ -227,6 +227,7 @@
     <Content Include="Areas\Student\Views\SVClass\Detail.cshtml" />
     <Content Include="Areas\Student\Views\SV_DetailStudent\Details.cshtml" />
     <Content Include="Areas\Student\Views\SV_DetailTeacher\Details.cshtml" />
+    <Content Include="Areas\Student\Views\SubmitAssignment\Index.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
