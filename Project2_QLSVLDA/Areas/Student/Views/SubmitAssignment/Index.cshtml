@@ -11,7 +11,7 @@
 
     var list_bt_lop = (from bt in db.BAITAPs
                        join nsv in db.NHOMSINHVIENs on bt.malop equals nsv.malop
-                       where nsv.masinhvien.Trim() == ses_sinhvien
+                       where nsv.masinhvien.Trim() == ses_sinhvien && bt.manhom == nsv.nhom
                        select bt).ToList();
 
 
