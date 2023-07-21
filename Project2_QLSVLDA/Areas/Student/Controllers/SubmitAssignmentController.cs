@@ -28,9 +28,8 @@ namespace Project2_QLSVLDA.Areas.Student.Controllers
 
         [HttpGet]
         [Route("DetailAndSubmit/{id}")]
-        public ActionResult DetailAndSubmit(string id)
+        public ActionResult DetailAndSubmit(string id,string malop_pass)
         {
-
 
             if (Session["user"] == null)
             {
@@ -44,7 +43,21 @@ namespace Project2_QLSVLDA.Areas.Student.Controllers
                                       select m.noidung).First();
                 ViewBag.noidung = noidung_baitap;
 
-                return View();
+                var student = Session["user"].ToString();
+
+                var a = db.SINHVIENBAITAPs.Where(m => m.masinhvien == student && m.mabaitap.ToString() == id && malop_pass == m.malop).FirstOrDefault();
+
+                if (a == null)
+                {
+                   
+                    return View(); // Trả về một View khác để hiển thị thông báo
+                }
+                else
+                {
+                    return View(a);
+                }
+
+                
             }
 
         }
@@ -55,7 +68,7 @@ namespace Project2_QLSVLDA.Areas.Student.Controllers
 
         #region Upload file
         [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase file,  int id, string exercise_content)
+        public ActionResult Upload(HttpPostedFileBase file, int id, string exercise_content)
         {
 
             tblFileDetail model = new tblFileDetail();
@@ -69,7 +82,7 @@ namespace Project2_QLSVLDA.Areas.Student.Controllers
                           where mabt.ToString() == m.mabaitap.ToString().Trim()
                           select m.malop).First();
 
-        
+
             #region Xu ly viec upload vao csdl
             using (var dbContext = new QL_PROJECTEntities1())
             {
@@ -128,7 +141,7 @@ namespace Project2_QLSVLDA.Areas.Student.Controllers
                     TempData["AlertMessage"] = "Uploaded Successfully !!";
                     return RedirectToAction("Index");
 
-                  
+
                 }
                 else
                 {
@@ -145,7 +158,7 @@ namespace Project2_QLSVLDA.Areas.Student.Controllers
 
             #endregion
 
-       
+
 
 
 

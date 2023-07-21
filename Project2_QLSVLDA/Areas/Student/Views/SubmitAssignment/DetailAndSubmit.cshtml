@@ -1,8 +1,9 @@
-﻿@model string
+﻿@model Project2_QLSVLDA.Models.SINHVIENBAITAP
 
 @{
     ViewBag.Title = "DetailAndSubmit";
     Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+    string str_ifexistmodel = (Model != null) ? Model.comment : "";
 }
 
 
@@ -35,9 +36,7 @@
                                 <label for="exercise_content">Mô tả</label>
                                 @* <input type="text" class="form-control" id="location" name="diadiem">*@
                                 <div>
-                                    <textarea name="exercise_content" rows="4" id="exercise_content" style="width:100%">
-
-                                        </textarea>
+                                    <textarea @((Model != null) ? "readonly" : "") name="exercise_content" rows="4" id="exercise_content" style="width: 100%; text-anchor:start">@str_ifexistmodel.Trim()</textarea>
                                 </div>
 
 
@@ -48,8 +47,17 @@
                                 <label for="exampleInputFile">File input</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
-                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                        <input type="file" class="custom-file-input" id="exampleInputFile" name="file" @((Model != null) ? "disabled" : "")>
+                                        <label class="custom-file-label" for="exampleInputFile">
+                                            @{
+                                                if (Model != null)
+                                                { @Model.tenfile }
+                                            else
+                                            {<span>Chọn File</span> }
+                                            }
+
+
+                                        </label>
                                     </div>
                                     <div class="input-group-append">
                                         <span class="input-group-text">Upload</span>
@@ -61,8 +69,11 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" @((Model != null) ? "disabled" : "")>Submit</button>
+                            <button class="btn btn-secondary" onclick="redirectToIndex()" style="margin-left: 16px">Cancel</button>
                         </div>
+
+
                     }
 
 
@@ -92,4 +103,14 @@
         $(function () {
             bsCustomFileInput.init();
         });</script>
+
+    <script>
+    function redirectToIndex() {
+        window.location.href = '@Url.Action("Index", " SubmitAssignment")';
+    }
+    </script>
+
+
+
+
 }
