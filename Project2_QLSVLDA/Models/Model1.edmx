@@ -12,7 +12,7 @@
           <Property Name="mabaitap" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="malop" Type="char" MaxLength="10" />
           <Property Name="manhom" Type="nchar" MaxLength="10" />
-          <Property Name="noidung" Type="text" />
+          <Property Name="noidung" Type="nvarchar" MaxLength="250" />
           <Property Name="ngaybatdau" Type="datetime" />
           <Property Name="ngayketthuc" Type="datetime" />
         </EntityType>
@@ -142,6 +142,14 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="tblFileDetails">
+          <Key>
+            <PropertyRef Name="SQLID" />
+          </Key>
+          <Property Name="SQLID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FILENAME" Type="nvarchar" MaxLength="500" />
+          <Property Name="FILEURL" Type="nvarchar" MaxLength="1500" />
+        </EntityType>
         <EntityType Name="USERACCOUNT">
           <Key>
             <PropertyRef Name="ID" />
@@ -215,6 +223,7 @@
           <EntitySet Name="SINHVIENCUOCHEN" EntityType="Self.SINHVIENCUOCHEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SINHVIENMONHOC" EntityType="Self.SINHVIENMONHOC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFileDetails" EntityType="Self.tblFileDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERACCOUNT" EntityType="Self.USERACCOUNT" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_PHANQUYEN_CHUCNANG" Association="Self.FK_PHANQUYEN_CHUCNANG">
             <End Role="CHUCNANG" EntitySet="CHUCNANG" />
@@ -347,6 +356,7 @@
             <End Role="CUOCHEN" EntitySet="CUOCHENs" />
             <End Role="SINHVIENCUOCHEN" EntitySet="SINHVIENCUOCHENs" />
           </AssociationSet>
+          <EntitySet Name="tblFileDetails" EntityType="QL_PROJECTModel.tblFileDetail" />
         </EntityContainer>
         <EntityType Name="CUOCHEN">
           <Key>
@@ -369,7 +379,7 @@
           <Property Name="mabaitap" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="malop" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="manhom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="noidung" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="noidung" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="ngaybatdau" Type="DateTime" Precision="3" />
           <Property Name="ngayketthuc" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SINHVIENBAITAPs" Relationship="QL_PROJECTModel.FK_SINHVIENBAITAP_BAITAP" FromRole="BAITAP" ToRole="SINHVIENBAITAP" />
@@ -434,6 +444,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tblFileDetail">
+          <Key>
+            <PropertyRef Name="SQLID" />
+          </Key>
+          <Property Name="SQLID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FILENAME" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FILEURL" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -585,6 +603,15 @@
                 <ScalarProperty Name="manhom" ColumnName="manhom" />
                 <ScalarProperty Name="masinhvien" ColumnName="masinhvien" />
                 <ScalarProperty Name="macuochen" ColumnName="macuochen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFileDetails">
+            <EntityTypeMapping TypeName="QL_PROJECTModel.tblFileDetail">
+              <MappingFragment StoreEntitySet="tblFileDetails">
+                <ScalarProperty Name="FILEURL" ColumnName="FILEURL" />
+                <ScalarProperty Name="FILENAME" ColumnName="FILENAME" />
+                <ScalarProperty Name="SQLID" ColumnName="SQLID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

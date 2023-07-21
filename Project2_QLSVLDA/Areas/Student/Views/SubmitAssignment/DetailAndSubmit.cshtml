@@ -20,7 +20,9 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form>
+
+                    @using (Html.BeginForm("Upload", "SubmitAssignment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Detail</label>
@@ -34,7 +36,7 @@
                                 <label for="exampleInputFile">File input</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                                        <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
                                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                     </div>
                                     <div class="input-group-append">
@@ -42,21 +44,40 @@
                                     </div>
                                 </div>
                             </div>
-                           
+
                         </div>
                         <!-- /.card-body -->
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
-                    </form>
+                    }
+
+
+
+
                 </div>
                 <!-- /.card -->
             </div>
             <!-- /.card -->
         </div>
-            <!--/.col (right) -->
-        </div>
-        <!-- /.row -->
-   
+        <!--/.col (right) -->
+    </div>
+    <!-- /.row -->
+
 </section>
+
+
+
+@section JS{
+
+
+    <!-- bs-custom-file-input -->
+    <script src="~/Content/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+
+    <script>
+        $(function () {
+            bsCustomFileInput.init();
+        });</script>
+}

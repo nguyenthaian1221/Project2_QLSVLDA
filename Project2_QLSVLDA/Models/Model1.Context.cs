@@ -38,5 +38,6 @@ namespace Project2_QLSVLDA.Models
         public virtual DbSet<NHOMSINHVIEN> NHOMSINHVIENs { get; set; }
         public virtual DbSet<SINHVIENBAITAP> SINHVIENBAITAPs { get; set; }
         public virtual DbSet<SINHVIENCUOCHEN> SINHVIENCUOCHENs { get; set; }
+        public virtual DbSet<tblFileDetail> tblFileDetails { get; set; }
     }
 }
