@@ -23,15 +23,27 @@
 
                     @using (Html.BeginForm("Upload", "SubmitAssignment", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
+                        @Html.Hidden("id", Request.QueryString["id"])
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Detail</label>
                                 <input type="text" class="form-control" id="exampleInputEmail1" value="@ViewBag.noidung" disabled>
                             </div>
+
+
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Comment</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Comment">
+                                <label for="exercise_content">Mô tả</label>
+                                @* <input type="text" class="form-control" id="location" name="diadiem">*@
+                                <div>
+                                    <textarea name="exercise_content" rows="4" id="exercise_content" style="width:100%">
+
+                                        </textarea>
+                                </div>
+
+
                             </div>
+
+
                             <div class="form-group">
                                 <label for="exampleInputFile">File input</label>
                                 <div class="input-group">

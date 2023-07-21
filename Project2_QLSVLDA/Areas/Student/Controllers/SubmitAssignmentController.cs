@@ -49,25 +49,161 @@ namespace Project2_QLSVLDA.Areas.Student.Controllers
 
         }
 
+
+
+
+
+        #region Upload file
         [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase file)
+        public ActionResult Upload(HttpPostedFileBase file,  int id, string exercise_content)
         {
 
-            if (file != null && file.ContentLength > 0)
+            tblFileDetail model = new tblFileDetail();
+            List<tblFileDetail> list = new List<tblFileDetail>();
+            QL_PROJECTEntities1 db = new QL_PROJECTEntities1();
+            DateTime timenow = DateTime.Now;
+            var mssv = Session["user"].ToString();
+            var mabt = id;
+            var cmt = exercise_content;
+            var _malop = (from m in db.BAITAPs
+                          where mabt.ToString() == m.mabaitap.ToString().Trim()
+                          select m.malop).First();
+
+        
+            #region Xu ly viec upload vao csdl
+            using (var dbContext = new QL_PROJECTEntities1())
             {
-                var newFileName = Guid.NewGuid();
-                var _extension = Path.GetExtension(file.FileName);
-                string NewName = newFileName + _extension;
-                string _FileName = Path.GetFileName(NewName);
-                string _path = Path.Combine(Server.MapPath("~/Uploads"), _FileName);
-                file.SaveAs(_path);
+                var fileDetails = dbContext.tblFileDetails.ToList();
+                foreach (var fileDetail in fileDetails)
+                {
+                    list.Add(new tblFileDetail
+                    {
+                        SQLID = fileDetail.SQLID,
+                        FILENAME = fileDetail.FILENAME,
+                        FILEURL = fileDetail.FILEURL
+                    });
+                }
+            }
+
+            model.FileList = list;
+
+            if (file != null)
+            {
+                var Extension = Path.GetExtension(file.FileName);
+                var Orgininame = Path.GetFileNameWithoutExtension(file.FileName);
+                var fileName = Orgininame + DateTime.Now.ToString("yyyyMMddHHmmssfff") + Extension;
+                string path = Path.Combine(Server.MapPath("~/UploadedFiles"), fileName);
+                model.FILEURL = Url.Content(Path.Combine("~/UploadedFiles/", fileName));
+                model.FILENAME = fileName;
+                #region Luu lai toan bo form vao bang SINHVIENBAITAP
+
+
+                var path_luu_csdl = Url.Content(Path.Combine("~/UploadedFiles/", fileName));
+                var name_luu_csdl = fileName;
+
+
+
+                //Xử lý lưu
+                db.SINHVIENBAITAPs.Add(
+                    new SINHVIENBAITAP
+                    {
+                        masinhvien = mssv,
+                        mabaitap = mabt,
+                        path = path_luu_csdl,
+                        thoigiannop = timenow,
+                        malop = _malop,
+                        tenfile = name_luu_csdl,
+                        comment = cmt
+                    });
+
+                db.SaveChanges();
+
+                #endregion
+
+                if (SaveFile(model))
+                {
+                    file.SaveAs(path);
+
+
+                    TempData["AlertMessage"] = "Uploaded Successfully !!";
+                    return RedirectToAction("Index");
+
+                  
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Error In Add File. Please Try Again !!!");
+                }
+
 
             }
+            else
+            {
+                ModelState.AddModelError("", "Please Choose Correct File Type !!");
+                //return View(model);
+            }
+
+            #endregion
+
+       
+
+
 
             return RedirectToAction("Index");
         }
 
+        #endregion
 
+
+
+        #region SaveFile
+        private bool SaveFile(tblFileDetail model)
+        {
+            using (var dbContext = new QL_PROJECTEntities1())
+            {
+                try
+                {
+                    var fileDetail = new tblFileDetail
+                    {
+                        FILENAME = model.FILENAME,
+                        FILEURL = model.FILEURL
+                    };
+
+                    dbContext.tblFileDetails.Add(fileDetail);
+                    dbContext.SaveChanges();
+
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+        #endregion
+
+
+
+        #region Download file
+        public ActionResult DownloadFile(string filePath)
+        {
+            string fullName = Server.MapPath("~" + filePath);
+
+            byte[] fileBytes = GetFile(fullName);
+            return File(
+                fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, filePath);
+        }
+
+        byte[] GetFile(string s)
+        {
+            System.IO.FileStream fs = System.IO.File.OpenRead(s);
+            byte[] data = new byte[fs.Length];
+            int br = fs.Read(data, 0, data.Length);
+            if (br != fs.Length)
+                throw new System.IO.IOException(s);
+            return data;
+        }
+        #endregion
 
 
 

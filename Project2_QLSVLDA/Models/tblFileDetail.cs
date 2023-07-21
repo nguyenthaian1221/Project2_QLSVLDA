@@ -11,7 +11,7 @@ namespace Project2_QLSVLDA.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class tblFileDetail
     {
         public int SQLID { get; set; }

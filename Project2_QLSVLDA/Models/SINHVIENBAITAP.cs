@@ -19,6 +19,8 @@ namespace Project2_QLSVLDA.Models
         public string path { get; set; }
         public System.DateTime thoigiannop { get; set; }
         public string malop { get; set; }
+        public string tenfile { get; set; }
+        public string comment { get; set; }
     
         public virtual BAITAP BAITAP { get; set; }
     }

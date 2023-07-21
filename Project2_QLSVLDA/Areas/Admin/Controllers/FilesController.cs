@@ -29,14 +29,14 @@ namespace Project2_QLSVLDA.Areas.Admin.Controllers
 
         }
 
-        private List<tblFileDetail> GetFileDetails()
-        {
-            using (var db = new QL_PROJECTEntities1())
-            {
-                return db.tblFileDetails.ToList();
-            }
+        //private List<tblFileDetail> GetFileDetails()
+        //{
+        //    using (var db = new QL_PROJECTEntities1())
+        //    {
+        //        return db.tblFileDetails.ToList();
+        //    }
 
-        }
+        //}
 
         private bool SaveFile(tblFileDetail model)
         {
