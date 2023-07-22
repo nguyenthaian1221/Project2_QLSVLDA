@@ -98,6 +98,15 @@
                         @*<a href="/teacher/detailstudent/details/@item.mssv.trim()">details</a>*@
                         <a href="@Url.Action("DetailAndSubmit","SubmitAssignment", new {id = item.mabaitap.ToString().Trim() ,malop_pass = item.malop}  )"> Details</a>
                     </td>
+                    <td>
+                        @{
+                            if (db.SINHVIENBAITAPs.Any(m => m.mabaitap == item.mabaitap && m.malop == item.malop && m.masinhvien == ses_sinhvien))
+                            { <span class="badge bg-success">Đã nộp</span> }
+                            else
+                            { <span class="badge bg-danger">Chưa nộp</span>
+                            }
+                        }
+                    </td>
                 </tr>
             }
         </table>
