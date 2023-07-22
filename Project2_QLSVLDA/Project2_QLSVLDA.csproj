@@ -128,6 +128,7 @@
     <Compile Include="Areas\Student\Controllers\SVProfileController.cs" />
     <Compile Include="Areas\Student\Controllers\SV_DetailStudentController.cs" />
     <Compile Include="Areas\Student\Controllers\SV_DetailTeacherController.cs" />
+    <Compile Include="Areas\Student\Controllers\SV_MeetingController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Teacher\Controllers\DetailStudentController.cs" />
     <Compile Include="Areas\Teacher\Controllers\GiaoVienBaiTapController.cs" />
@@ -233,6 +234,8 @@
     <Content Include="Areas\Student\Views\SV_DetailTeacher\Details.cshtml" />
     <Content Include="Areas\Student\Views\SubmitAssignment\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Files\Index.cshtml" />
+    <Content Include="Areas\Student\Views\SV_Meeting\Index.cshtml" />
+    <Content Include="Areas\Student\Views\SV_Meeting\Book.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
