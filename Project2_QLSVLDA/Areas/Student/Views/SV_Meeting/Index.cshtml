@@ -109,7 +109,7 @@
 
                                                 if (item.tinhtrang == 1)
                                                 {
-                                                    url_temp = Url.Action("Book", "SV_Meeting", new { id = item.magiaovien.Trim() }).ToString();
+                                                    url_temp = Url.Action("Book", "SV_Meeting", new { id = item.magiaovien.Trim(), macuochen = item.macuochen, magiaovien = item.magiaovien }).ToString();
                                                 }
                                                 else
 
@@ -216,5 +216,11 @@
         });
     </script>
 
-
+    @if (TempData["Message"] != null)
+    {
+        <script>
+        var message = '@TempData["Message"]';
+        alert(message);
+        </script>
+    }
 }

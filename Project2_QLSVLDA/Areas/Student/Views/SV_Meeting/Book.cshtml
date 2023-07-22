@@ -20,6 +20,7 @@
 }
 
 
+
 <section class="content">
     <div class="container-fluid ">
         <div class="row">
@@ -31,13 +32,19 @@
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Submit form</h3>
+
+                        <button class="btn btn-secondary" onclick="redirectToIndex1()" style="float: right">
+                            <i class="fas fa-times"></i>
+                        </button>
+
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
 
                     @using (Html.BeginForm("DienThongTin", "SV_Meeting", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return validateForm();" }))
                     {
-
+                        @Html.Hidden("macuochen", Request.QueryString["macuochen"])
+                        @Html.Hidden("magiaovien", Request.QueryString["magiaovien"])
                         <div class="card-body">
 
                             <div class="row">
@@ -77,13 +84,11 @@
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
-                            <button class="btn btn-secondary" onclick="redirectToIndex1()" style="margin-left: 16px">Cancel</button>
+
                         </div>
 
 
                     }
-
-
 
 
                 </div>
@@ -138,5 +143,7 @@
         }
 
     </script>
+
+
 }
 

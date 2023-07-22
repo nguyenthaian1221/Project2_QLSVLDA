@@ -29,7 +29,7 @@ namespace Project2_QLSVLDA.Areas.Student.Controllers
 
         [HttpGet]
         [Route("Book/{id}")]
-        public ActionResult Book(string id)
+        public ActionResult Book(string id, string macuochen, string magiaovien)
         {
             if (Session["user"] == null)
             {
@@ -47,70 +47,48 @@ namespace Project2_QLSVLDA.Areas.Student.Controllers
 
 
         [HttpPost]
-        public ActionResult DienThongTin()
+        public ActionResult DienThongTin(string lopgianday, string nhomtronglop, string macuochen, string magiaovien)
         {
 
             //tblFileDetail model = new tblFileDetail();
             //List<tblFileDetail> list = new List<tblFileDetail>();
-            //QL_PROJECTEntities1 db = new QL_PROJECTEntities1();
-            //DateTime timenow = DateTime.Now;
-            //var mssv = Session["user"].ToString();
-            //var mabt = id;
-            //var cmt = exercise_content;
-            //var _malop = (from m in db.BAITAPs
-            //              where mabt.ToString() == m.mabaitap.ToString().Trim()
-            //              select m.malop).First();
+            ;
+            DateTime timenow = DateTime.Now;
+            var mssv = Session["user"].ToString();
 
+            string lop = lopgianday;
+            string nhom = nhomtronglop;
+            string mahen = macuochen;
+            string magv = magiaovien;
 
+            using (QL_PROJECTEntities1 db = new QL_PROJECTEntities1())
+            {
 
-            //using (var dbContext = new QL_PROJECTEntities1())
-            //{
-            //    var fileDetails = dbContext.tblFileDetails.ToList();
-            //    foreach (var fileDetail in fileDetails)
-            //    {
-            //        list.Add(new tblFileDetail
-            //        {
-            //            SQLID = fileDetail.SQLID,
-            //            FILENAME = fileDetail.FILENAME,
-            //            FILEURL = fileDetail.FILEURL
-            //        });
-            //    }
-            //}
+                var cuochen = db.CUOCHENs.FirstOrDefault(s => s.macuochen.ToString() == mahen);
 
-            //model.FileList = list;
+                if (cuochen != null)
+                {
+                    // Thực hiện sửa giá trị cần thay đổi
+                    // Thay thế "Ten" bằng tên cột cần sửa và "New Name" bằng giá trị mới.
+                    cuochen.tinhtrang = 2;
+                    // Lưu thay đổi vào cơ sở dữ liệu
+                    db.SaveChanges();
+                }
 
-            //if (file != null)
-            //{
-            //    var Extension = Path.GetExtension(file.FileName);
-            //    var Orgininame = Path.GetFileNameWithoutExtension(file.FileName);
-            //    var fileName = Orgininame + DateTime.Now.ToString("yyyyMMddHHmmssfff") + Extension;
-            //    string path = Path.Combine(Server.MapPath("~/UploadedFiles"), fileName);
-            //    model.FILEURL = Url.Content(Path.Combine("~/UploadedFiles/", fileName));
-            //    model.FILENAME = fileName;
+                db.SINHVIENCUOCHENs.Add(new SINHVIENCUOCHEN
+                {
+                    macuochen = int.Parse(mahen),
+                    masinhvien = mssv,
+                    manhom = nhom,
+                    magiaovien = magv,
+                    thoigiandat = timenow,
+                    malop = lop
 
+                });
+                db.SaveChanges();
+            }
 
-
-            //    var path_luu_csdl = Url.Content(Path.Combine("~/UploadedFiles/", fileName));
-            //    var name_luu_csdl = fileName;
-
-
-
-            //    //Xử lý lưu
-
-
-            //    db.SaveChanges();
-
-
-
-
-            //}
-
-
-
-
-
-
-
+            TempData["Message"] = "Successfully Booked";
             return RedirectToAction("Index");
         }
 
