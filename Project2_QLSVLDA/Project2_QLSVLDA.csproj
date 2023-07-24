@@ -120,6 +120,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\EventController.cs" />
     <Compile Include="Areas\Admin\Controllers\FilesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Student\Controllers\SinhVienHomeController.cs" />
@@ -239,6 +240,7 @@
     <Content Include="Areas\Student\Views\SV_Meeting\HistoryBook.cshtml" />
     <Content Include="Areas\Teacher\Views\GiaoVienCuocHen\DanhSachHen.cshtml" />
     <Content Include="Areas\Teacher\Views\GiaoVienBaiTap\XemDanhSachBaiTapSinhVienNop.cshtml" />
+    <Content Include="Areas\Admin\Views\Event\Index.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

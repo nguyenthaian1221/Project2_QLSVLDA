@@ -83,5 +83,35 @@ namespace Project2_QLSVLDA.Areas.Teacher.Controllers
             }
 
         }
+
+
+        [HttpPost]
+        public ActionResult ActionName_Nhanxet(string id_meeting,string gv_comment)
+        {
+            var ses = Session["user"].ToString();
+            using (QL_PROJECTEntities1 db = new QL_PROJECTEntities1())
+            {
+
+                var cuochen = db.CUOCHENs.FirstOrDefault(s => s.macuochen.ToString() == id_meeting.Trim() && ses == s.magiaovien.Trim() && s.tinhtrang != 1);
+
+                if (cuochen != null)
+                {
+                    // Thực hiện sửa giá trị cần thay đổi
+                    // Thay thế "Ten" bằng tên cột cần sửa và "New Name" bằng giá trị mới.
+                    cuochen.ghichu = gv_comment;
+                    // Lưu thay đổi vào cơ sở dữ liệu
+                    db.SaveChanges();
+                    TempData["Message"] = "Successfully save";
+                }
+                else { TempData["Message"] = "Failed! Check ID!"; }
+
+            }
+
+            
+            return Redirect("~/Teacher/GiaoVienCuocHen/DanhSachHen");
+
+        }
+
+
     }
 }
