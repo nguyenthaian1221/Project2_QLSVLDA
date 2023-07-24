@@ -69,5 +69,19 @@ namespace Project2_QLSVLDA.Areas.Teacher.Controllers
 
             return RedirectToAction("Index", "GiaoVienCuocHen", new { area = "Teacher" });
         }
+
+        public ActionResult DanhSachHen()
+        {
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("DangNhap", "HomeAdmin", new { area = "Admin" });
+            }
+            else
+            {
+
+                return View();
+            }
+
+        }
     }
 }

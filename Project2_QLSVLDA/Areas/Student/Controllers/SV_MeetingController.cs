@@ -93,6 +93,19 @@ namespace Project2_QLSVLDA.Areas.Student.Controllers
         }
 
 
+        public ActionResult HistoryBook()
+        {
+
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("DangNhap", "HomeAdmin", new { area = "Admin" });
+            }
+            else
+            {
+
+                return View();
+            }
+        }
 
     }
 

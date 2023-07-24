@@ -58,7 +58,7 @@ namespace Project2_QLSVLDA.Areas.Teacher.Controllers
                     ngayketthuc = end_time,
                 }
 
-                ); 
+                );
             db.SaveChanges();
 
 
@@ -67,6 +67,23 @@ namespace Project2_QLSVLDA.Areas.Teacher.Controllers
 
             return RedirectToAction("Index", "GiaoVienBaiTap", new { area = "Teacher" });
         }
+
+
+
+        public ActionResult XemDanhSachBaiTapSinhVienNop()
+        {
+
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("DangNhap", "HomeAdmin", new { area = "Admin" });
+            }
+            else
+            {
+
+                return View();
+            }
+        }
+
 
     }
 }

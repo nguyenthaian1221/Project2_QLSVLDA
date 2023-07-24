@@ -236,6 +236,9 @@
     <Content Include="Areas\Admin\Views\Files\Index.cshtml" />
     <Content Include="Areas\Student\Views\SV_Meeting\Index.cshtml" />
     <Content Include="Areas\Student\Views\SV_Meeting\Book.cshtml" />
+    <Content Include="Areas\Student\Views\SV_Meeting\HistoryBook.cshtml" />
+    <Content Include="Areas\Teacher\Views\GiaoVienCuocHen\DanhSachHen.cshtml" />
+    <Content Include="Areas\Teacher\Views\GiaoVienBaiTap\XemDanhSachBaiTapSinhVienNop.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

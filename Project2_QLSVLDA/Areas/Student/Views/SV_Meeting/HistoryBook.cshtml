@@ -1,8 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "HistoryBook";
     Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+    var sess = Session["user"].ToString();
 }
+
+
+
 
 @{
     var db = new Project2_QLSVLDA.Models.QL_PROJECTEntities1();
@@ -11,6 +15,7 @@
 
     var cuochen_allsystem = (from ch in db.CUOCHENs
                              join gv in db.GIANGVIENs on ch.magiaovien equals gv.magv
+                             join svch in db.SINHVIENCUOCHENs on ch.macuochen equals svch.macuochen
                              select new
                              {
                                  ch.macuochen,
@@ -19,7 +24,11 @@
                                  ch.thoigianketthuc,
                                  gv.ten,
                                  ch.tinhtrang,
-                                 ch.diadiem
+                                 ch.diadiem,
+                                 svch.thoigiandat,
+                                 ch.ghichu,
+                                 svch.masinhvien
+
                              }).ToList();
 
     var ds_lop_sv_hoc = (from lmh in db.LOPMONHOCs
@@ -30,7 +39,7 @@
     //var nhomKhacNhau = list_cuoc_hen.Select(item => item.malop).Distinct().ToArray();
 
 
-    var list_cuoc_hen = cuochen_allsystem.Where(p => ds_lop_sv_hoc.Contains(p.magiaovien)).ToList();
+    var list_cuoc_hen = cuochen_allsystem.Where(p => p.masinhvien.ToString().Trim() == ses_sinhvien).ToList();
 
 
 
@@ -65,8 +74,8 @@
                                     <th>Kết thúc</th>
                                     <th>Giáo viên</th>
                                     <th>Địa điểm</th>
-                                    <th>Tình trạng</th>
-                                    <th>Đặt lịch</th>
+                                    <th>Thời gian đặt</th>
+                                    <th>Nhận xét của giáo viên</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -92,33 +101,11 @@
                                             @item.diadiem
                                         </td>
                                         <td>
-                                            @{
-                                                if (item.tinhtrang == 1)
-                                                { <span class="badge bg-success">available</span> }
-                                                else
-                                                { <span class="badge bg-danger">unavailable</span>
-                                                }
-                                            }
+                                            @item.thoigiandat
                                         </td>
 
                                         <td>
-                                            @*<button onclick="redirectToIndex(@item.magiaovien.Trim())" class="btn btn-primary" @((item.tinhtrang != 1) ? "disabled" : "")>Đặt</button>*@
-
-                                            @{
-                                                string url_temp;
-
-                                                if (item.tinhtrang == 1)
-                                                {
-                                                    url_temp = Url.Action("Book", "SV_Meeting", new { id = item.magiaovien.Trim(), macuochen = item.macuochen, magiaovien = item.magiaovien }).ToString();
-                                                }
-                                                else
-
-                                                {
-                                                    url_temp = "#";
-                                                }
-                                            }
-
-                                            <a class="btn btn-primary" href="@url_temp "> Đặt</a>
+                                            @item.ghichu
                                         </td>
                                     </tr>
 
@@ -132,8 +119,8 @@
                                     <th>Kết thúc</th>
                                     <th>Giáo viên</th>
                                     <th>Địa điểm</th>
-                                    <th>Tình trạng</th>
-                                    <th>Đặt lịch</th>
+                                    <th>Thời gian đặt</th>
+                                    <th>Nhận xét của giáo viên</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -195,7 +182,7 @@
     <script src="~/Content/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="~/Content/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- AdminLTE App -->
-    
+
     <!-- AdminLTE for demo purposes -->
     <!-- Page specific script -->
     <script>
@@ -216,11 +203,4 @@
         });
     </script>
 
-    @if (TempData["Message"] != null)
-    {
-        <script>
-        var message = '@TempData["Message"]';
-        alert(message);
-        </script>
-    }
 }

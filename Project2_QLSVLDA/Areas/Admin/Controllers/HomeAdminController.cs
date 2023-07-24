@@ -40,24 +40,24 @@ namespace Project2_QLSVLDA.Areas.Admin.Controllers
             {
                 // lưu vào session
 
-                if (user.ToLower() == "admin")
+                if (user.ToUpper() == "admin".ToUpper())
                 {
-                    Session["user"] = user;
-                    ViewBag.user = user;
+                    Session["user"] = user.ToUpper();
+                    ViewBag.user = user.ToUpper();
 
                     return RedirectToAction("Index");
                 }
-                else if (db.SINHVIENs.Any(m => m.massv == user.ToLower()))
+                else if (db.SINHVIENs.Any(m => m.massv.ToUpper() == user.ToUpper()))
                 {
-                    Session["user"] = user;
-                    ViewBag.user = user;
+                    Session["user"] = user.ToUpper();
+                    ViewBag.user = user.ToUpper();
                     return RedirectToAction("Index", "SinhVienHome", new { area = "Student" });
                 }
 
-                else if (db.GIANGVIENs.Any(m => m.magv == user.ToLower()))
+                else if (db.GIANGVIENs.Any(m => m.magv.ToUpper() == user.ToUpper()))
                 {
-                    Session["user"] = user;
-                    ViewBag.user = user;
+                    Session["user"] = user.ToUpper();
+                    ViewBag.user = user.ToUpper();
                     return RedirectToAction("Index", "GiaoVienHome", new { area = "Teacher" });
                 }
 
