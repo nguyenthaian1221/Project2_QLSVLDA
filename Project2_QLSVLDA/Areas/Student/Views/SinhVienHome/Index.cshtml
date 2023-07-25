@@ -2,9 +2,62 @@
     Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
 }
 
+@{
+    var db = new Project2_QLSVLDA.Models.QL_PROJECTEntities1();
+    var user_ses = Session["user"].ToString();
+
+    var list_sinhvienmonhoc = db.SINHVIENCUOCHENs.Where(m => m.masinhvien == user_ses).ToList();
+    var solophoc = list_sinhvienmonhoc.Select(m => m.masinhvien).Distinct().Count();
 
 
+    var list_bt_lop = (from bt in db.BAITAPs
+                       join nsv in db.NHOMSINHVIENs on bt.malop equals nsv.malop
+                       where nsv.masinhvien.Trim() == user_ses && bt.manhom == nsv.nhom
+                       select bt).ToList();
+    var sobaitap = list_bt_lop.Count();
 
+
+    var cuochen_allsystem = (from ch in db.CUOCHENs
+                             join gv in db.GIANGVIENs on ch.magiaovien equals gv.magv
+                             join svch in db.SINHVIENCUOCHENs on ch.macuochen equals svch.macuochen
+                             select new
+                             {
+                                 ch.macuochen,
+                                 ch.magiaovien,
+                                 ch.thoigianbatdau,
+                                 ch.thoigianketthuc,
+                                 gv.ten,
+                                 ch.tinhtrang,
+                                 ch.diadiem,
+                                 svch.thoigiandat,
+                                 ch.ghichu,
+                                 svch.masinhvien
+
+                             }).ToList();
+
+
+    var ds_lop_sv_hoc = (from lmh in db.LOPMONHOCs
+                         join svmh in db.SINHVIENMONHOCs on lmh.malop equals svmh.malop
+                         where svmh.mssv == user_ses
+                         select lmh.magv).ToList();
+
+    //var nhomKhacNhau = list_cuoc_hen.Select(item => item.malop).Distinct().ToArray();
+
+
+    var list_cuoc_hen = cuochen_allsystem.Where(p => ds_lop_sv_hoc.Contains(p.magiaovien)).ToList();
+    var so_cuoc_hen = list_cuoc_hen.Count();
+
+
+}
+
+
+<!-- Modal để hiển thị chi tiết nội dung sự kiện -->
+<div id="eventModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="eventDetails"></div>
+    </div>
+</div>
 
 <!-- Main content -->
 <section class="content">
@@ -15,14 +68,14 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>150</h3>
+                        <h3>@solophoc</h3>
 
-                        <p>Số lớp hiện nay</p>
+                        <p>Số lớp hiện có</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="@Url.Action("Index","SVClass")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -30,14 +83,14 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+                        <h3>@sobaitap</h3>
 
-                        <p>Số lượng bài tập</p>
+                        <p>Số bài tập hiện có</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="@Url.Action("Index","SubmitAssignment")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -45,14 +98,14 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3>@so_cuoc_hen</h3>
 
-                        <p>Số lượng cuộc hẹn</p>
+                        <p>Số cuộc hẹn hiện có</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="@Url.Action("HistoryBook","SV_Meeting")" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
@@ -135,18 +188,34 @@
 
     <script type="text/javascript">
 
-			$(document).ready(function () {
-				$('#calendar').fullCalendar({
-        			header: {
-            			left: 'prev,next today',
-            			center: 'title',
-            			right: 'month,agendaWeek,agendaDay'
-					},
-            		firstDay: 1, //The day that each week begins (Monday=1)
-            		slotMinutes: 60,
-            		events: '@Url.RouteUrl(new{ action="GetEvents", controller= "SinhVienHome" })'
-        		});
-    		});
+       // Hàm lấy dữ liệu sự kiện từ máy chủ
+        function getEventsFromServer() {
+            return $.ajax({
+                url: '@Url.Action("GetEvents", "SinhVienHome")',
+                type: 'GET',
+                dataType: 'json'
+            });
+        }
+
+
+        // Khởi tạo lịch
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month'
+            },
+            firstDay: 1, // The day that each week begins (Monday=1)
+            slotMinutes: 60,
+            events: function (start, end, timezone, callback) {
+                // Gọi hàm lấy dữ liệu sự kiện từ máy chủ
+                getEventsFromServer().done(function (eventsData) {
+                    callback(eventsData);
+                });
+            }
+
+        });
+
     </script>
 
 

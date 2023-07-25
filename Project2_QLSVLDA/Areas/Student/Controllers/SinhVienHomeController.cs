@@ -28,16 +28,19 @@ namespace Project2_QLSVLDA.Areas.Student.Controllers
         public JsonResult GetEvents()
         {
 
+            string str = Session["user"].ToString();
+            var list_cuoc_hen_sinh_vien = (from ch in db.CUOCHENs
+                                          join svch in db.SINHVIENCUOCHENs on ch.macuochen equals svch.macuochen
+                                          where svch.masinhvien.Trim() == str
+                                          select ch).ToList();
 
 
 
-            return Json(db.CUOCHENs.AsEnumerable().Select(e => new
+            return Json(list_cuoc_hen_sinh_vien.AsEnumerable().Select(e => new
             {
-                id = e.macuochen,
-                title = "Lịch gặp sv",
-                description = e.ghichu,
-                start = e.thoigianbatdau.Value.ToString("MM/dd/yyyy HH:mm"),
-                end = e.thoigianketthuc.Value.ToString("MM/dd/yyyy HH:mm")
+                title = e.diadiem,
+                start = e.thoigianbatdau.Value.ToString("yyyy/MM/dd HH:mm"),
+                end = e.thoigianketthuc.Value.ToString("yyyy/MM/dd HH:mm")
 
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
