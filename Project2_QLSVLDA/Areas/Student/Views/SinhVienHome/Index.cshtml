@@ -6,8 +6,8 @@
     var db = new Project2_QLSVLDA.Models.QL_PROJECTEntities1();
     var user_ses = Session["user"].ToString();
 
-    var list_sinhvienmonhoc = db.SINHVIENCUOCHENs.Where(m => m.masinhvien == user_ses).ToList();
-    var solophoc = list_sinhvienmonhoc.Select(m => m.masinhvien).Distinct().Count();
+    var list_sinhvienmonhoc = db.SINHVIENMONHOCs.Where(m => m.mssv == user_ses).ToList();
+    var solophoc = list_sinhvienmonhoc.Select(m => m.mssv).Distinct().Count();
 
 
     var list_bt_lop = (from bt in db.BAITAPs
@@ -44,7 +44,7 @@
     //var nhomKhacNhau = list_cuoc_hen.Select(item => item.malop).Distinct().ToArray();
 
 
-    var list_cuoc_hen = cuochen_allsystem.Where(p => ds_lop_sv_hoc.Contains(p.magiaovien)).ToList();
+    var list_cuoc_hen = cuochen_allsystem.Where(p => ds_lop_sv_hoc.Contains(p.magiaovien) && p.masinhvien.Trim() == user_ses).ToList();
     var so_cuoc_hen = list_cuoc_hen.Count();
 
 
